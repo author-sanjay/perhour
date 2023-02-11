@@ -43,16 +43,7 @@ public interface UserService {
 
     public Projects removeuser(long id,long project);
 
-    // add bid
-    public Bids add(long id, Bids bid,long project);
 
-    // updatebid
-    public Bids update(long id, Bids bid,long project);
-    // deletedbid
-
-    public Bids delete(long id, long bid);
-    // readbid
-    public Bids read(long id, long project);
 
     //wallet balance
     public float readbalance(long id);

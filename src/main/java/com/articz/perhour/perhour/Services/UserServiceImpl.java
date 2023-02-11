@@ -95,25 +95,6 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    @Override
-    public Bids add(long id, Bids bid, long project) {
-        return null;
-    }
-
-    @Override
-    public Bids update(long id, Bids bid, long project) {
-        return null;
-    }
-
-    @Override
-    public Bids delete(long id, long bid) {
-        return null;
-    }
-
-    @Override
-    public Bids read(long id, long project) {
-        return null;
-    }
 
     @Override
     public float readbalance(long id) {
