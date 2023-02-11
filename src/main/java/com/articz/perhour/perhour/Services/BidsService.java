@@ -3,6 +3,8 @@ package com.articz.perhour.perhour.Services;
 import com.articz.perhour.perhour.Entity.Bids;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface BidsService {
 
@@ -15,5 +17,8 @@ public interface BidsService {
 
     public Bids delete(long id, long bid);
     // readbid
-    public Bids read(long id, long project);
+    public Bids readsingle(long id, long project);
+
+
+    public List<Bids> readforproject(long project);
 }
