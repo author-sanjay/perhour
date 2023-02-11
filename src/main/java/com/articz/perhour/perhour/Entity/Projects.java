@@ -44,11 +44,12 @@ public class Projects {
 
     private String paymentstatus;
 
+    private String status;
     public Projects() {
         super();
     }
 
-    public Projects(long id, String title, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, Users givenby, Users givento, boolean paymentdone, String paymentid, String paymentstatus) {
+    public Projects(long id, String title, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, Users givenby, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, String paymentstatus, String status) {
         this.id = id;
         this.title = title;
         this.shortdescription = shortdescription;
@@ -60,9 +61,11 @@ public class Projects {
         this.timelimit = timelimit;
         this.givenby = givenby;
         this.givento = givento;
+        this.bids = bids;
         this.paymentdone = paymentdone;
         this.paymentid = paymentid;
         this.paymentstatus = paymentstatus;
+        this.status = status;
     }
 
     public long getId() {
@@ -153,6 +156,14 @@ public class Projects {
         this.givento = givento;
     }
 
+    public List<Bids> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<Bids> bids) {
+        this.bids = bids;
+    }
+
     public boolean isPaymentdone() {
         return paymentdone;
     }
@@ -175,5 +186,13 @@ public class Projects {
 
     public void setPaymentstatus(String paymentstatus) {
         this.paymentstatus = paymentstatus;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

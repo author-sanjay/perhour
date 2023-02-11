@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ProjectsDao extends JpaRepository<Projects,Long> {
-    public List<Projects> findByName(String name);
+    public List<Projects> findByTitle(String name);
 }
