@@ -36,23 +36,17 @@ public class Users {
 
     private String billingaddress;
 
+    private float star;
+
 @ManyToOne
 @JoinColumn(name = "membership_id")
 private Membership membership;
-
-    public Membership getMembership() {
-        return membership;
-    }
-
-    public void setMembership(Membership membership) {
-        this.membership = membership;
-    }
 
     public Users() {
         super();
     }
 
-    public Users(long id, String firstname, String lastname, LocalDate dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress) {
+    public Users(long id, String firstname, String lastname, LocalDate dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, float star, Membership membership) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -68,6 +62,8 @@ private Membership membership;
         this.accountnumber = accountnumber;
         this.ifsc = ifsc;
         this.billingaddress = billingaddress;
+        this.star = star;
+        this.membership = membership;
     }
 
     public long getId() {
@@ -188,5 +184,21 @@ private Membership membership;
 
     public void setBillingaddress(String billingaddress) {
         this.billingaddress = billingaddress;
+    }
+
+    public float getStar() {
+        return star;
+    }
+
+    public void setStar(float star) {
+        this.star = star;
+    }
+
+    public Membership getMembership() {
+        return membership;
+    }
+
+    public void setMembership(Membership membership) {
+        this.membership = membership;
     }
 }
