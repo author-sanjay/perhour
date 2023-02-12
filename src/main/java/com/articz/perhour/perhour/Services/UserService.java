@@ -17,7 +17,7 @@ public interface UserService {
 
     public Users get(long id);
 
-    public Users getall();
+    public List<Users> getall();
 
     public Users addMembership(long id,long membership);
 

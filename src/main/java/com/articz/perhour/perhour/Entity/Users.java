@@ -38,15 +38,16 @@ public class Users {
 
     private float star;
 
-@ManyToOne
-@JoinColumn(name = "membership_id")
-private Membership membership;
+    @ManyToOne
+    @JoinColumn(name = "membership_id")
+    private Membership membership;
 
-    public Users() {
-        super();
-    }
 
-    public Users(long id, String firstname, String lastname, LocalDate dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, float star, Membership membership) {
+    @OneToOne
+    @JoinColumn(name = "wallet_id")
+    private Wallet wallet;
+
+    public Users(long id, String firstname, String lastname, LocalDate dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, float star, Membership membership, Wallet wallet) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -64,6 +65,11 @@ private Membership membership;
         this.billingaddress = billingaddress;
         this.star = star;
         this.membership = membership;
+        this.wallet = wallet;
+    }
+
+    public Users() {
+        super();
     }
 
     public long getId() {
@@ -200,5 +206,13 @@ private Membership membership;
 
     public void setMembership(Membership membership) {
         this.membership = membership;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 }
