@@ -38,7 +38,6 @@ public interface UserService {
 
     public Projects updateProject(Projects project);
 
-    public Projects updateProjectfreelancer(long id,Projects project);
 
     public  Projects requestextend(long id, long project, long days);
 
@@ -49,7 +48,7 @@ public interface UserService {
     //wallet balance
     public float readbalance(long id);
 
-    public WalletTxn add(long id, WalletTxn walletTxn);
+
 
     public List<WalletTxn> read(long id);
 

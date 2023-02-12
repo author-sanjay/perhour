@@ -203,7 +203,9 @@ public class UserServiceImpl implements UserService {
                 users.get().setProjects(userproject);
                 usersDao.save(users.get());
                 projects1.setGivento(users.get());
-
+                projects1.setStatus("STARTED");
+                projectsDao.save(projects1);
+                return  projects1;
             }
         }
         return null;
@@ -211,37 +213,69 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Projects updateProject(Projects project) {
+        Optional<Projects> projects=projectsDao.findById(project.getId());
+        if(projects.isPresent()){
+            Projects projects1=projects.get();
+            projects1=project;
+            projectsDao.save(projects1);
+            return projects1;
+        }
         return null;
     }
 
-    @Override
-    public Projects updateProjectfreelancer(long id, Projects project) {
-        return null;
-    }
+
 
     @Override
     public Projects requestextend(long id, long project, long days) {
+        Optional<Projects> projects=projectsDao.findById(project);
+        if(projects.isPresent()){
+            Projects projects1=projects.get();
+            projects1.setExtend(days);
+            projectsDao.save(projects1);
+            return projects1;
+        }
         return null;
     }
 
     @Override
     public Projects removeuser(long id, long project) {
+        Optional<Projects> projects=projectsDao.findById(project);
+        if(projects.isPresent()){
+            Projects projects1=projects.get();
+            Optional<Users> users=usersDao.findById(id);
+            if(users.isPresent()){
+//                projects1.setGivento(null);
+                projects1.setStatus("CANCELLED");
+                Projects projects2=new Projects();
+                projects2=projects1;
+                projects2.setExtend(0);
+                projects2.setStatus("ACTIVE");
+                projects2.setBids(projects1.getBids());
+                projects2.setGivento(null);
+                projectsDao.save(projects2);
+                projectsDao.save(projects1);
+                return  projects1;
+            }
+        }
         return null;
     }
 
 
     @Override
     public float readbalance(long id) {
+        Optional<Users> users=usersDao.findById(id);
+        if(users.isPresent()){
+            return  users.get().getWallet().getBalance();
+        }
         return 0;
     }
 
     @Override
-    public WalletTxn add(long id, WalletTxn walletTxn) {
-        return null;
-    }
-
-    @Override
     public List<WalletTxn> read(long id) {
+        Optional<Users> users=usersDao.findById(id);
+        if(users.isPresent()){
+            return  users.get().getWallet().getTxn();
+        }
         return null;
     }
 }

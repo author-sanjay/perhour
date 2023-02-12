@@ -14,6 +14,7 @@ public class Projects {
 
     private String title;
 
+    private long extend;
     private String shortdescription;
     private String fulldescription;
 
@@ -49,9 +50,10 @@ public class Projects {
         super();
     }
 
-    public Projects(long id, String title, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, Users givenby, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, String paymentstatus, String status) {
+    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, Users givenby, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, String paymentstatus, String status) {
         this.id = id;
         this.title = title;
+        this.extend = extend;
         this.shortdescription = shortdescription;
         this.fulldescription = fulldescription;
         this.price = price;
@@ -82,6 +84,14 @@ public class Projects {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public long getExtend() {
+        return extend;
+    }
+
+    public void setExtend(long extend) {
+        this.extend = extend;
     }
 
     public String getShortdescription() {
