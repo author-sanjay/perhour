@@ -1,6 +1,7 @@
 package com.articz.perhour.perhour.Services;
 
 import com.articz.perhour.perhour.Dao.MembershipDao;
+import com.articz.perhour.perhour.Dao.ProjectsDao;
 import com.articz.perhour.perhour.Dao.UsersDao;
 import com.articz.perhour.perhour.Entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     public MembershipDao membershipDao;
+
+    @Autowired
+    public ProjectsDao projectsDao;
+
     @Autowired
     public UsersDao usersDao;
     @Override
@@ -186,6 +191,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Projects addProject(long id, long project) {
+        Optional<Users> users=usersDao.findById(id);
+        if(users.isPresent()){
+            Optional<Projects> projects=projectsDao.findById(project);
+            if(projects.isPresent()){
+                List<Projects> userproject=users.get().getProjects();
+                Projects projects1=projects.get();
+                projects1.setStatus("STARTED");
+                userproject.add(projects1);
+                users.get().setProjects(null);
+                users.get().setProjects(userproject);
+                usersDao.save(users.get());
+                projects1.setGivento(users.get());
+
+            }
+        }
         return null;
     }
 
