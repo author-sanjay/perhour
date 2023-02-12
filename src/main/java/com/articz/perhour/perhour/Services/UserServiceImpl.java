@@ -152,12 +152,36 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Projects> getCompleted(long id) {
+        Optional<Users> users=usersDao.findById(id);
+        if(users.isPresent()){
+            List<Projects> active = null;
+            List<Projects> projects=users.get().getProjects();
+            for(int i=0;i<projects.size();i++){
+                if(projects.get(i).getStatus()=="COMPLETE"){
+                    active.add(projects.get(i));
+                }
+            }
+            return active;
+        }
+
         return null;
     }
 
     @Override
     public List<Projects> getcanceled(long id) {
+        Optional<Users> users=usersDao.findById(id);
+        if(users.isPresent()){
+            List<Projects> active = null;
+            List<Projects> projects=users.get().getProjects();
+            for(int i=0;i<projects.size();i++){
+                if(projects.get(i).getStatus()=="CANCELLED"){
+                    active.add(projects.get(i));
+                }
+            }
+            return active;
+        }
         return null;
+
     }
 
     @Override
