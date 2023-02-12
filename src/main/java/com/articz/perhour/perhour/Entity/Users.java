@@ -38,6 +38,8 @@ public class Users {
 
     private float star;
 
+    private LocalDate membershipexpiry;
+
     @ManyToOne
     @JoinColumn(name = "membership_id")
     private Membership membership;
@@ -47,7 +49,7 @@ public class Users {
     @JoinColumn(name = "wallet_id")
     private Wallet wallet;
 
-    public Users(long id, String firstname, String lastname, LocalDate dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, float star, Membership membership, Wallet wallet) {
+    public Users(long id, String firstname, String lastname, LocalDate dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, float star, LocalDate membershipexpiry, Membership membership, Wallet wallet) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -64,12 +66,9 @@ public class Users {
         this.ifsc = ifsc;
         this.billingaddress = billingaddress;
         this.star = star;
+        this.membershipexpiry = membershipexpiry;
         this.membership = membership;
         this.wallet = wallet;
-    }
-
-    public Users() {
-        super();
     }
 
     public long getId() {
@@ -198,6 +197,14 @@ public class Users {
 
     public void setStar(float star) {
         this.star = star;
+    }
+
+    public LocalDate getMembershipexpiry() {
+        return membershipexpiry;
+    }
+
+    public void setMembershipexpiry(LocalDate membershipexpiry) {
+        this.membershipexpiry = membershipexpiry;
     }
 
     public Membership getMembership() {
