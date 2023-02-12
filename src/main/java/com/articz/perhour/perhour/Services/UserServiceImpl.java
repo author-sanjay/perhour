@@ -6,6 +6,7 @@ import com.articz.perhour.perhour.Entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,6 +91,23 @@ public class UserServiceImpl implements UserService {
             return users1;
         }
 
+        return null;
+    }
+
+    @Override
+    public Users checkMembership(long id,long membership) {
+        Optional<Users> users=usersDao.findById(id);
+        if(users.isPresent()){
+            Optional<Membership> membership1=membershipDao.findById(membership);
+            if(membership1.isPresent()){
+                Users users1=users.get();
+                LocalDate now = LocalDate.now();
+                if(users1.getMembershipexpiry().isBefore(now.plusDays(membership1.get().getDuration()))){
+                    users1.setMembership(null);
+                }
+            }
+
+        }
         return null;
     }
 

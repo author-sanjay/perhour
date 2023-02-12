@@ -19,6 +19,8 @@ public class Membership {
 
     private long extendedbids;
 
+    private long duration;
+
 
     @OneToMany(mappedBy = "membership")
     private List<Users> users;
@@ -27,13 +29,13 @@ public class Membership {
         super();
     }
 
-    public Membership(long id, String name, String description, long price, long extendedbids, List<Users> users) {
-
+    public Membership(long id, String name, String description, long price, long extendedbids, long duration, List<Users> users) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.extendedbids = extendedbids;
+        this.duration = duration;
         this.users = users;
     }
 
@@ -75,6 +77,14 @@ public class Membership {
 
     public void setExtendedbids(long extendedbids) {
         this.extendedbids = extendedbids;
+    }
+
+    public long getDuration() {
+        return duration;
+    }
+
+    public void setDuration(long duration) {
+        this.duration = duration;
     }
 
     public List<Users> getUsers() {
