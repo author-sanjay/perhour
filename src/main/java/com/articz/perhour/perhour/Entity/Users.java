@@ -3,6 +3,7 @@ package com.articz.perhour.perhour.Entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Users {
@@ -49,7 +50,13 @@ public class Users {
     @JoinColumn(name = "wallet_id")
     private Wallet wallet;
 
-    public Users(long id, String firstname, String lastname, LocalDate dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, float star, LocalDate membershipexpiry, Membership membership, Wallet wallet) {
+    @OneToMany(mappedBy = "givento")
+    private List<Projects> projects;
+    public Users() {
+        super();
+    }
+
+    public Users(long id, String firstname, String lastname, LocalDate dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, float star, LocalDate membershipexpiry, Membership membership, Wallet wallet, List<Projects> projects) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -69,6 +76,7 @@ public class Users {
         this.membershipexpiry = membershipexpiry;
         this.membership = membership;
         this.wallet = wallet;
+        this.projects = projects;
     }
 
     public long getId() {
@@ -221,5 +229,13 @@ public class Users {
 
     public void setWallet(Wallet wallet) {
         this.wallet = wallet;
+    }
+
+    public List<Projects> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Projects> projects) {
+        this.projects = projects;
     }
 }

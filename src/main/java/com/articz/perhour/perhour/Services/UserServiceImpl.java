@@ -113,16 +113,40 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Projects getProject(long id, long project) {
+        Optional<Users> users=usersDao.findById(id);
+        if(users.isPresent()){
+            List<Projects> projects = users.get().getProjects();
+            for(int i=0;i<projects.size();i++){
+                if(projects.get(i).getId()==project){
+                    return projects.get(i);
+                }
+            }
+        }
         return null;
     }
 
     @Override
     public List<Projects> getallprojects(long id) {
+        Optional<Users> users=usersDao.findById(id);
+        if(users.isPresent()){
+            return users.get().getProjects();
+        }
         return null;
     }
 
     @Override
     public List<Projects> getactiveprojects(long id) {
+        Optional<Users> users=usersDao.findById(id);
+        if(users.isPresent()){
+            List<Projects> active = null;
+            List<Projects> projects=users.get().getProjects();
+            for(int i=0;i<projects.size();i++){
+                if(projects.get(i).getStatus()=="ACTIVE"){
+                    active.add(projects.get(i));
+                }
+            }
+            return active;
+        }
         return null;
     }
 
