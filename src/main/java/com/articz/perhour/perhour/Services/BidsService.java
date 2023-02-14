@@ -12,12 +12,12 @@ public interface BidsService {
     public Bids add(long id, Bids bid, long project);
 
     // updatebid
-    public Bids update(long id, Bids bid,long project);
+    public Bids update( Bids bid);
     // deletedbid
 
     public Bids delete(long id, long bid);
     // readbid
-    public Bids readsingle(long id, long project);
+    public Bids readsingle(long id);
 
 
     public List<Bids> readforproject(long project);
