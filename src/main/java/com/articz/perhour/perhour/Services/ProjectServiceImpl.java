@@ -43,8 +43,7 @@ public class ProjectServiceImpl implements ProjectService{
     public Projects makepayment(long project) {
         Optional<Projects> projects=projectsDao.findById(project);
         if(projects.isPresent()){
-//            projectsDao.deleteById(project);
-//            return projects.get();
+            /* TODO MAKE PAYMENT */
         }
         return null;
     }
