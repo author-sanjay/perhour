@@ -1,8 +1,10 @@
 package com.articz.perhour.perhour.Services;
 
 import com.articz.perhour.perhour.Dao.UsersDao;
+import com.articz.perhour.perhour.Dao.WalletDao;
 import com.articz.perhour.perhour.Dao.WalletTxnDao;
 import com.articz.perhour.perhour.Entity.Users;
+import com.articz.perhour.perhour.Entity.Wallet;
 import com.articz.perhour.perhour.Entity.WalletTxn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ public class WalletTxnServiceImpl implements WalletTxnService{
 
     @Autowired
     public UsersDao usersDao;
+    @Autowired
+    private WalletDao walletDao;
 
 
     @Override
@@ -31,10 +35,13 @@ public class WalletTxnServiceImpl implements WalletTxnService{
         if(users.isPresent()){
             Users users1=users.get();
             WalletTxn taxx=walletTxnDao.save(txn);
-            List<WalletTxn> tx=users1.getWallet().getTxn();
+            Wallet wal=users1.getWallet();
+            List<WalletTxn> tx=wal.getTxn();
             tx.add(taxx);
-            users1.getWallet().setTxn(tx);
-            usersDao.save(users1);
+            float balance=wal.getBalance();
+            balance=balance+taxx.getAmount();
+            walletDao.save(wal);
+
             return taxx;
         }
         return null;
