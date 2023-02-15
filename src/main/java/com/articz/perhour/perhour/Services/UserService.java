@@ -23,8 +23,8 @@ public interface UserService {
 
     public  Users removeMembership(long id,long membership);
 
-    public  Users checkMembership(long id,long membership);
-    public Projects getProject(long id, long project);
+    public  Users  checkMembership(long id,long membership);
+    public Projects  getProject(long id, long project);
 
     public List<Projects> getallprojects(long id);
 
@@ -42,7 +42,6 @@ public interface UserService {
     public  Projects requestextend(long id, long project, long days);
 
     public Projects removeuser(long id,long project);
-
 
 
     //wallet balance
