@@ -7,10 +7,12 @@ import com.articz.perhour.perhour.Entity.Bids;
 import com.articz.perhour.perhour.Entity.Projects;
 import com.articz.perhour.perhour.Entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class BidServiceImpl implements BidsService{
 
     @Autowired

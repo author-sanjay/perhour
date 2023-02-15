@@ -4,9 +4,12 @@ import com.articz.perhour.perhour.Dao.ProjectsDao;
 import com.articz.perhour.perhour.Entity.Membership;
 import com.articz.perhour.perhour.Entity.Projects;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+
+@Service
 public class ProjectServiceImpl implements ProjectService{
 
     @Autowired

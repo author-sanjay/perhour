@@ -3,10 +3,13 @@ package com.articz.perhour.perhour.Services;
 import com.articz.perhour.perhour.Dao.MembershipDao;
 import com.articz.perhour.perhour.Entity.Membership;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+
+@Service
 public class MembershipServiceImpl implements MembershipService{
 
     @Autowired
