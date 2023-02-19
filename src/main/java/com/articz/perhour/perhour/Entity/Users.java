@@ -37,6 +37,8 @@ public class Users {
 
     private String billingaddress;
 
+    private long bidsleft;
+
     private float star;
 
     private LocalDate membershipexpiry;
@@ -55,7 +57,7 @@ public class Users {
         super();
     }
 
-    public Users(long id, String firstname, String lastname, LocalDate dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, float star, LocalDate membershipexpiry, Membership membership, Wallet wallet, List<Projects> projects) {
+    public Users(long id, String firstname, String lastname, LocalDate dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, long bidsleft, float star, LocalDate membershipexpiry, Membership membership, Wallet wallet, List<Projects> projects) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -71,13 +73,13 @@ public class Users {
         this.accountnumber = accountnumber;
         this.ifsc = ifsc;
         this.billingaddress = billingaddress;
+        this.bidsleft = bidsleft;
         this.star = star;
         this.membershipexpiry = membershipexpiry;
         this.membership = membership;
         this.wallet = wallet;
         this.projects = projects;
     }
-
 
     public long getId() {
         return id;
@@ -197,6 +199,14 @@ public class Users {
 
     public void setBillingaddress(String billingaddress) {
         this.billingaddress = billingaddress;
+    }
+
+    public long getBidsleft() {
+        return bidsleft;
+    }
+
+    public void setBidsleft(long bidsleft) {
+        this.bidsleft = bidsleft;
     }
 
     public float getStar() {

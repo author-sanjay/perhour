@@ -30,14 +30,21 @@ public class BidServiceImpl implements BidsService{
         Optional<Projects> projects=projectsDao.findById(project);
         if(users.isPresent() && projects.isPresent()){
             Users users1=users.get();
-            Projects projects1=projects.get();
-            bid.setBidby(users1);
-            bidsDao.save(bid);
-            List<Bids> bids=projects1.getBids();
-            bids.add(bid);
-            projects1.setBids(bids);
-            projectsDao.save(projects1);
-return bid;
+            if(users1.getBidsleft()>0){
+                Projects projects1=projects.get();
+                bid.setBidby(users1);
+                bidsDao.save(bid);
+                List<Bids> bids=projects1.getBids();
+                bids.add(bid);
+                projects1.setBids(bids);
+                projectsDao.save(projects1);
+                users1.setBidsleft(users1.getBidsleft()-1);
+                usersDao.save(users1);
+                return bid;
+            }else{
+                return null;
+            }
+
         }
         return null;
     }

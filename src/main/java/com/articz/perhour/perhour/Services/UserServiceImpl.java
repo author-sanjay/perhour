@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
     public UsersDao usersDao;
     @Override
     public Users add(Users users) {
+        users.setBidsleft(10);
         Wallet wal=new Wallet();
         users.setWallet(wal);
         usersDao.save(users);
