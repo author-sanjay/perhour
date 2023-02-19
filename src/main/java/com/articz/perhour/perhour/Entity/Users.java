@@ -46,9 +46,8 @@ public class Users {
     private Membership membership;
 
 
-    @OneToOne
-    @JoinColumn(name = "wallet_id")
-    private Wallet wallet;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    public Wallet wallet;
 
     @OneToMany(mappedBy = "givento")
     private List<Projects> projects;
@@ -78,6 +77,7 @@ public class Users {
         this.wallet = wallet;
         this.projects = projects;
     }
+
 
     public long getId() {
         return id;

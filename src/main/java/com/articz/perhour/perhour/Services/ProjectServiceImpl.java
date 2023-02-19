@@ -1,6 +1,7 @@
 package com.articz.perhour.perhour.Services;
 
 import com.articz.perhour.perhour.Dao.ProjectsDao;
+import com.articz.perhour.perhour.Dao.UsersDao;
 import com.articz.perhour.perhour.Entity.Membership;
 import com.articz.perhour.perhour.Entity.Projects;
 import com.articz.perhour.perhour.Entity.Users;
@@ -16,10 +17,18 @@ public class ProjectServiceImpl implements ProjectService{
 
     @Autowired
     public ProjectsDao projectsDao;
+    @Autowired
+    private UsersDao usersDao;
 
     @Override
-    public Projects add(Projects project) {
-        return projectsDao.save(project);
+    public Projects add(Projects project,long id) {
+        Optional<Users> users=usersDao.findById(id);
+        if(users.isPresent()){
+            project.setGivenby(users.get());
+            projectsDao.save(project);
+            return project;
+        }
+        return null;
     }
 
     @Override
@@ -38,26 +47,32 @@ public class ProjectServiceImpl implements ProjectService{
     public Projects delete(long project) {
         Optional<Projects> projects=projectsDao.findById(project);
         if(projects.isPresent()){
-            Users user=projects.get().getGivento();
-            List<Projects> projects1=user.getProjects();
-            for(int i=0;i<projects1.size();i++){
-                if(projects1.get(i).getId()==project){
-                    projects1.remove(i);
+
+            try {
+                Users user = projects.get().getGivento();
+                List<Projects> projects1 = user.getProjects();
+                for (int i = 0; i < projects1.size(); i++) {
+                    if (projects1.get(i).getId() == project) {
+                        projects1.remove(i);
+                    }
                 }
-            }
 
-            Users user2=projects.get().getGivenby();
-            List<Projects> projects2=user2.getProjects();
-            for(int i=0;i<projects2.size();i++){
-                if(projects2.get(i).getId()==project){
-                    projects2.remove(i);
+                Users user2 = projects.get().getGivenby();
+                List<Projects> projects2 = user2.getProjects();
+                for (int i = 0; i < projects2.size(); i++) {
+                    if (projects2.get(i).getId() == project) {
+                        projects2.remove(i);
+                    }
                 }
+
+
+                projectsDao.deleteById(project);
+
+                return projects.get();
             }
-
-
-            projectsDao.deleteById(project);
-
-            return projects.get();
+            catch (Exception e){
+                projectsDao.deleteById(project);
+            }
         }
         return null;
     }

@@ -17,9 +17,9 @@ public class ProjectsController {
 
 
 
-    @PostMapping(path = "/add")
-    public Projects add(@RequestBody Projects projects){
-        return  this.projectService.add(projects);
+    @PostMapping(path = "/add/{id}")
+    public Projects add(@RequestBody Projects projects,@PathVariable long id){
+        return  this.projectService.add(projects, id);
     }
 
 

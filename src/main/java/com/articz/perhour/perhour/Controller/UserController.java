@@ -27,14 +27,14 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    private Users delete(@PathVariable long users){
-        return  this.userService.remove(users);
+    private Users delete(@PathVariable long id){
+        return  this.userService.remove(id);
     }
 
 
     @GetMapping("/getuser/{id}")
-    private Users getUsers(@PathVariable long users){
-        return  this.userService.get(users);
+    private Users getUsers(@PathVariable long id){
+        return  this.userService.get(id);
     }
 
     @GetMapping("/getall")

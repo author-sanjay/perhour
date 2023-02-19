@@ -1,5 +1,6 @@
 package com.articz.perhour.perhour.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,9 +13,10 @@ public class Wallet {
 
     private  long balance;
 
-@OneToOne
-@JoinColumn(name = "users_id")
-private Users users;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @JoinColumn(name = "uid")
+    public Users user;
 
 
 
@@ -25,10 +27,10 @@ private Users users;
         super();
     }
 
-    public Wallet(long id, long balance, Users users, List<WalletTxn> txn) {
+    public Wallet(long id, long balance, Users user, List<WalletTxn> txn) {
         this.id = id;
         this.balance = balance;
-        this.users = users;
+        this.user = user;
         this.txn = txn;
     }
 
@@ -48,12 +50,12 @@ private Users users;
         this.balance = balance;
     }
 
-    public Users getUsers() {
-        return users;
+    public Users getUser() {
+        return user;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
     public List<WalletTxn> getTxn() {

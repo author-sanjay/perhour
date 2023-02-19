@@ -51,4 +51,7 @@ public interface UserService {
 
     public List<WalletTxn> read(long id);
 
+
+    //TODO Add Request Payment
+
 }

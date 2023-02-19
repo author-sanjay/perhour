@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public interface ProjectService {
-    public Projects add(Projects project) ;
+    public Projects add(Projects project,long id) ;
 
     public Projects update(Projects project) ;
 
