@@ -9,6 +9,7 @@ import com.articz.perhour.perhour.Entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,8 @@ public class BidServiceImpl implements BidsService{
             Users users1=users.get();
             if(users1.getBidsleft()>0){
                 Projects projects1=projects.get();
+                bid.setProject(projects1);
+                bid.setBiddate(LocalDate.now());
                 bid.setBidby(users1);
                 bidsDao.save(bid);
                 List<Bids> bids=projects1.getBids();

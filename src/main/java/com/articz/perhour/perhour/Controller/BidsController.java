@@ -17,6 +17,7 @@ public class BidsController {
 
 
 
+//    done
     //add
     @PostMapping(path = "/add/{id}/{id2}")
     public Bids add(@RequestBody Bids bids, @PathVariable long id, @PathVariable long id2){
@@ -24,6 +25,7 @@ public class BidsController {
     }
 
 
+    //TODO do properly
     //getall
 
     @PostMapping(path = "/update")
@@ -34,13 +36,15 @@ public class BidsController {
 
     //delete
 
-    @DeleteMapping(path = "/delete/{id}/{id2}")
+//done
+    @DeleteMapping(path = "/delete/{projectid}/{bidid}")
     public Bids delete(@PathVariable long projectid, @PathVariable long bidid){
         return  this.bidsService.delete(projectid, bidid);
     }
 
 
 
+//    done
     //getprojectbids
     @GetMapping(path = "/getprojectbids/{id}")
     public List<Bids> getbids(@PathVariable long id){
@@ -49,6 +53,7 @@ public class BidsController {
 
 
 
+//    done
     //getsinglebid
     @GetMapping(path = "/getbid/{id}")
     public Bids getbid(@PathVariable long id){
