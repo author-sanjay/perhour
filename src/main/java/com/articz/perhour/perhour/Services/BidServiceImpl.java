@@ -57,7 +57,10 @@ public class BidServiceImpl implements BidsService{
         Optional<Bids > bids=bidsDao.findById(bid.getId());
         if(bids.isPresent() ){
            Bids bids1=bids.get();
-           bids1=bid;
+
+           bids1.setPrice(bid.getPrice());
+           bids1.setBiddescription(bid.getBiddescription());
+
            bidsDao.save(bids1);
            return bids1;
 
