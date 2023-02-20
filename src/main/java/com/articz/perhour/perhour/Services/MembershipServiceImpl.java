@@ -2,6 +2,7 @@ package com.articz.perhour.perhour.Services;
 
 import com.articz.perhour.perhour.Dao.MembershipDao;
 import com.articz.perhour.perhour.Entity.Membership;
+import com.articz.perhour.perhour.Entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,15 @@ public class MembershipServiceImpl implements MembershipService{
     public Membership add(Membership membership) {
         membershipDao.save(membership);
         return membership;
+    }
+
+    @Override
+    public List<Users> users(long id) {
+        Optional<Membership> membership=membershipDao.findById(id);
+        if(membership.isPresent()){
+            return membership.get().getUsers();
+        }
+        return null;
     }
 
     @Override

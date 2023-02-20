@@ -24,7 +24,6 @@ public class BidsController {
     }
 
 
-
     //getall
 
     @PostMapping(path = "/update")

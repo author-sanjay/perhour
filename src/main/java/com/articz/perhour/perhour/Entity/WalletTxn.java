@@ -1,5 +1,6 @@
 package com.articz.perhour.perhour.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ public class WalletTxn {
 
     @ManyToOne
     @JoinColumn(name = "wallet_id")
+    @JsonIgnore
     private Wallet wallet;
 
     public WalletTxn() {

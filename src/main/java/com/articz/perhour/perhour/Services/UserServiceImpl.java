@@ -3,11 +3,13 @@ package com.articz.perhour.perhour.Services;
 import com.articz.perhour.perhour.Dao.MembershipDao;
 import com.articz.perhour.perhour.Dao.ProjectsDao;
 import com.articz.perhour.perhour.Dao.UsersDao;
+import com.articz.perhour.perhour.Dao.WalletDao;
 import com.articz.perhour.perhour.Entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,12 +24,19 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     public UsersDao usersDao;
+    @Autowired
+    private WalletDao walletDao;
+
     @Override
     public Users add(Users users) {
         users.setBidsleft(10);
         Wallet wal=new Wallet();
         users.setWallet(wal);
-        usersDao.save(users);
+
+        Users users1=usersDao.save(users);
+        wal.setUser(users1);
+        walletDao.save(wal);
+        
         return users;
 
 
@@ -79,6 +88,7 @@ public class UserServiceImpl implements UserService {
             Optional<Membership> membership1=membershipDao.findById(membership);
             if(membership1.isPresent()){
                 users1.setMembership(membership1.get());
+                users1.setMembershipexpiry(users1.getMembershipexpiry().plusDays(membership1.get().getDuration()));
             }
             usersDao.save(users1);
             return users1;
@@ -91,17 +101,30 @@ public class UserServiceImpl implements UserService {
     public Users removeMembership(long id, long membership) {
         Optional<Users> users=usersDao.findById(id);
         if(users.isPresent()){
-            Users users1=users.get();
-            users1.setMembership(null);
-            usersDao.save(users1);
-            return users1;
+            Optional<Membership> membership1=membershipDao.findById(membership);
+            if(membership1.isPresent()) {
+                Users users1 = users.get();
+                users1.setMembership(null);
+                users1.setMembershipexpiry(LocalDate.now());
+                usersDao.save(users1);
+                List<Users> users2= membership1.get().getUsers();
+                for(int i=0;i<users2.size();i++){
+                    if(users2.get(i).getId()==id){
+                        users2.remove(i);
+                    }
+                }
+                membership1.get().setUsers(users2);
+                membershipDao.save(membership1.get());
+
+                return users1;
+            }
         }
 
         return null;
     }
 
     @Override
-    public Users checkMembership(long id,long membership) {
+    public Boolean checkMembership(long id,long membership) {
         Optional<Users> users=usersDao.findById(id);
         if(users.isPresent()){
             Optional<Membership> membership1=membershipDao.findById(membership);
@@ -110,11 +133,16 @@ public class UserServiceImpl implements UserService {
                 LocalDate now = LocalDate.now();
                 if(users1.getMembershipexpiry().isBefore(now.plusDays(membership1.get().getDuration()))){
                     users1.setMembership(null);
+                    usersDao.save(users1);
+                    return false;
                 }
+                return  true;
+
             }
 
+            return true;
         }
-        return null;
+        return false;
     }
 
     @Override
@@ -144,11 +172,12 @@ public class UserServiceImpl implements UserService {
     public List<Projects> getactiveprojects(long id) {
         Optional<Users> users=usersDao.findById(id);
         if(users.isPresent()){
-            List<Projects> active = null;
+            ArrayList<Projects> active=new ArrayList<>();
             List<Projects> projects=users.get().getProjects();
             for(int i=0;i<projects.size();i++){
-                if(projects.get(i).getStatus()=="ACTIVE"){
+                if(projects.get(i).getStatus().equals("STARTED")){
                     active.add(projects.get(i));
+                    System.out.println("Yes");
                 }
             }
             return active;
@@ -160,10 +189,10 @@ public class UserServiceImpl implements UserService {
     public List<Projects> getCompleted(long id) {
         Optional<Users> users=usersDao.findById(id);
         if(users.isPresent()){
-            List<Projects> active = null;
+            ArrayList<Projects> active = new ArrayList<>();
             List<Projects> projects=users.get().getProjects();
             for(int i=0;i<projects.size();i++){
-                if(projects.get(i).getStatus()=="COMPLETE"){
+                if(projects.get(i).getStatus().equals("COMPLETE")){
                     active.add(projects.get(i));
                 }
             }
@@ -177,10 +206,10 @@ public class UserServiceImpl implements UserService {
     public List<Projects> getcanceled(long id) {
         Optional<Users> users=usersDao.findById(id);
         if(users.isPresent()){
-            List<Projects> active = null;
+            ArrayList<Projects> active = new ArrayList<>();
             List<Projects> projects=users.get().getProjects();
             for(int i=0;i<projects.size();i++){
-                if(projects.get(i).getStatus()=="CANCELLED"){
+                if(projects.get(i).getStatus().equals("CANCELLED")){
                     active.add(projects.get(i));
                 }
             }
@@ -200,7 +229,7 @@ public class UserServiceImpl implements UserService {
                 Projects projects1=projects.get();
                 projects1.setStatus("STARTED");
                 userproject.add(projects1);
-                users.get().setProjects(null);
+//                users.get().setProjects(null);
                 users.get().setProjects(userproject);
                 usersDao.save(users.get());
                 projects1.setGivento(users.get());

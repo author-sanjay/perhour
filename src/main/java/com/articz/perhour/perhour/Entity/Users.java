@@ -1,5 +1,6 @@
 package com.articz.perhour.perhour.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -43,7 +44,8 @@ public class Users {
 
     private LocalDate membershipexpiry;
 
-    @ManyToOne
+    @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "membership_id")
     private Membership membership;
 
@@ -52,6 +54,7 @@ public class Users {
     public Wallet wallet;
 
     @OneToMany(mappedBy = "givento")
+    @JsonIgnore
     private List<Projects> projects;
     public Users() {
         super();

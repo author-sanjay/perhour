@@ -1,5 +1,6 @@
 package com.articz.perhour.perhour.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class Membership {
 
 
     @OneToMany(mappedBy = "membership")
+    @JsonIgnore
     private List<Users> users;
 
     public Membership() {

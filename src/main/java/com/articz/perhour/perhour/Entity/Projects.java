@@ -1,5 +1,6 @@
 package com.articz.perhour.perhour.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -30,13 +31,16 @@ public class Projects {
 
     @OneToOne
     @JoinColumn(name = "givenby_id")
+    @JsonIgnore
     private Users givenby;
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "givento_id")
     private Users givento;
 
     @OneToMany(mappedBy = "project")
+    @JsonIgnore
     private List<Bids> bids;
 
     private boolean paymentdone;

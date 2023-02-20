@@ -2,6 +2,7 @@ package com.articz.perhour.perhour.Controller;
 
 import com.articz.perhour.perhour.Entity.Bids;
 import com.articz.perhour.perhour.Entity.Membership;
+import com.articz.perhour.perhour.Entity.Users;
 import com.articz.perhour.perhour.Services.MembershipService;
 import com.articz.perhour.perhour.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class MembershipController {
     @GetMapping(path = "/getall")
     public List<Membership> getall(){
         return  this.membershipService.readall();
+    }
+
+    @GetMapping(path = "/getusers/{id}")
+    public List<Users> getusers(@PathVariable long id){
+        return  this.membershipService.users(id);
     }
 
     @GetMapping(path = "/getsingle/{id}")
