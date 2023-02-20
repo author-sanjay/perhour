@@ -9,6 +9,7 @@ import com.articz.perhour.perhour.Entity.WalletTxn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,12 +35,15 @@ public class WalletTxnServiceImpl implements WalletTxnService{
         Optional<Users> users=usersDao.findById(id);
         if(users.isPresent()){
             Users users1=users.get();
+            txn.setWallet(users1.getWallet());
+            txn.setDate(LocalDate.now());
             WalletTxn taxx=walletTxnDao.save(txn);
             Wallet wal=users1.getWallet();
             List<WalletTxn> tx=wal.getTxn();
             tx.add(taxx);
             float balance=wal.getBalance();
             balance=balance+taxx.getAmount();
+            wal.setBalance((long) balance);
             walletDao.save(wal);
 
             return taxx;

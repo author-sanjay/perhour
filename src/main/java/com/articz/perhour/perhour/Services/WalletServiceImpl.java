@@ -22,7 +22,7 @@ public class WalletServiceImpl implements WalletService{
 
 
     @Override
-    public long balance(long id) {
+    public float balance(long id) {
         Optional<Users> users=usersDao.findById(id);
         if(users.isPresent()){
             Wallet wallet1=users.get().getWallet();

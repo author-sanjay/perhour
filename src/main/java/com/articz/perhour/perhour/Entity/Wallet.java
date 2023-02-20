@@ -11,7 +11,7 @@ public class Wallet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private  long balance;
+    private  float balance;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
@@ -28,7 +28,7 @@ public class Wallet {
         super();
     }
 
-    public Wallet(long id, long balance, Users user, List<WalletTxn> txn) {
+    public Wallet(long id, float balance, Users user, List<WalletTxn> txn) {
         this.id = id;
         this.balance = balance;
         this.user = user;
@@ -43,11 +43,11 @@ public class Wallet {
         this.id = id;
     }
 
-    public long getBalance() {
+    public float getBalance() {
         return balance;
     }
 
-    public void setBalance(long balance) {
+    public void setBalance(float balance) {
         this.balance = balance;
     }
 

@@ -17,11 +17,16 @@ public class WalletController {
     @Autowired
     private WalletService walletService;
 
-    @GetMapping(path = "/balace/{id}")
-    public long balance(@PathVariable long id){
+
+//    done
+    @GetMapping(path = "/balance/{id}")
+    public float balance(@PathVariable long id){
         return this.walletService.balance(id);
     }
 
+
+
+//    done
     @GetMapping(path = "/txns/{id}")
     public List<WalletTxn> txns(@PathVariable long id){
         return this.walletService.gettxn(id);

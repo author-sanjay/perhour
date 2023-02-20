@@ -15,17 +15,21 @@ public class WalletTxnController {
     private WalletTxnService walletTxnService;
 
 
+    //done
     @PostMapping("/add/{id}")
     public WalletTxn ad(@RequestBody WalletTxn walletTxn, @PathVariable long id){
         return  this.walletTxnService.add(walletTxn,id);
     }
 
+    //done
     @GetMapping("/getall")
     public List<WalletTxn> getall(){
         return  this.walletTxnService.getall();
     }
 
-    @GetMapping("/getall/{id}")
+
+//    done
+    @GetMapping("/getsingle/{id}")
     public WalletTxn getsingle(@PathVariable long id){
         return  this.walletTxnService.getsingledetail(id);
     }

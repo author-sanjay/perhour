@@ -130,16 +130,24 @@ public class UserController {
         return  this.userService.requestextend(user,pr,days);
     }
 
+
+    //done
     @PostMapping("/removefromproject/{user}/{pr}")
     private Projects removefrompr(@PathVariable long user,@PathVariable long pr){
         return  this.userService.removeuser(user,pr);
     }
 
+
+
+    //done
     @GetMapping("/balance/{user}")
     private float bal(@PathVariable long user){
         return  this.userService.readbalance(user);
     }
 
+
+
+//    done
     @GetMapping("/gettxn/{user}")
     private List<WalletTxn> txns(@PathVariable long user){
         return  this.userService.read(user);

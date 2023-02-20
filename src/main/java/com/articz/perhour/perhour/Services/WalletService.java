@@ -7,6 +7,6 @@ import java.util.List;
 
 @Service
 public interface WalletService {
-    public long balance(long id);
+    public float balance(long id);
     public List<WalletTxn> gettxn(long id);
 }

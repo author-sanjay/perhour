@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
 
         Users users1=usersDao.save(users);
         wal.setUser(users1);
+        wal.setBalance(0);
         walletDao.save(wal);
         
         return users;
