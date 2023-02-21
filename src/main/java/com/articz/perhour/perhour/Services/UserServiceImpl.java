@@ -89,6 +89,7 @@ public class UserServiceImpl implements UserService {
             Optional<Membership> membership1=membershipDao.findById(membership);
             if(membership1.isPresent()){
                 users1.setMembership(membership1.get());
+                users1.setBidsleft(users1.getBidsleft()+membership1.get().getExtendedbids());
                 users1.setMembershipexpiry(users1.getMembershipexpiry().plusDays(membership1.get().getDuration()));
             }
             usersDao.save(users1);
