@@ -8,6 +8,7 @@ import com.articz.perhour.perhour.Entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,13 @@ public class ProjectServiceImpl implements ProjectService{
     public Projects add(Projects project,long id) {
         Optional<Users> users=usersDao.findById(id);
         if(users.isPresent()){
+            ArrayList<String> tagss=new ArrayList<>();
+            String st[]=project.getTaggs().split(",");
+            for(String sr:st){
+                tagss.add(sr);
+
+            }
+            project.setTags(tagss);
             project.setGivenby(users.get());
             projectsDao.save(project);
             return project;
@@ -98,5 +106,20 @@ public class ProjectServiceImpl implements ProjectService{
             /* TODO MAKE PAYMENT */
         }
         return null;
+    }
+
+    @Override
+    public List<Projects> bytags(String st) {
+        List<Projects> pr=projectsDao.findAll();
+        ArrayList<Projects> ans=new ArrayList<>();
+        for(int i=0;i<pr.size();i++){
+            List<String> tagss=pr.get(i).getTags();
+            for(String tg:tagss){
+                if(tg.equals(st)){
+                    ans.add(pr.get(i));
+                }
+            }
+        }
+        return ans;
     }
 }

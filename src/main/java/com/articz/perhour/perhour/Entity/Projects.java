@@ -34,6 +34,8 @@ public class Projects {
     @JsonIgnore
     private Users givenby;
 
+    private List<String> tags;
+
     @OneToOne
     @JsonIgnore
     @JoinColumn(name = "givento_id")
@@ -50,11 +52,13 @@ public class Projects {
     private String paymentstatus;
 
     private String status;
+    private  String taggs;
     public Projects() {
         super();
     }
 
-    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, Users givenby, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, String paymentstatus, String status) {
+
+    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, Users givenby, List<String> tags, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, String paymentstatus, String status, String taggs) {
         this.id = id;
         this.title = title;
         this.extend = extend;
@@ -66,12 +70,14 @@ public class Projects {
         this.lastdate = lastdate;
         this.timelimit = timelimit;
         this.givenby = givenby;
+        this.tags = tags;
         this.givento = givento;
         this.bids = bids;
         this.paymentdone = paymentdone;
         this.paymentid = paymentid;
         this.paymentstatus = paymentstatus;
         this.status = status;
+        this.taggs = taggs;
     }
 
     public long getId() {
@@ -162,6 +168,14 @@ public class Projects {
         this.givenby = givenby;
     }
 
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
     public Users getGivento() {
         return givento;
     }
@@ -208,5 +222,13 @@ public class Projects {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getTaggs() {
+        return taggs;
+    }
+
+    public void setTaggs(String taggs) {
+        this.taggs = taggs;
     }
 }
