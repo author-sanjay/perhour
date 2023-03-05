@@ -16,6 +16,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
+    @PostMapping("/verifyusername/{id}")
+    private  boolean verufiyusername(@PathVariable String id){return  this.userService.verifyusername(id);}
+
     //done
     @PostMapping("/add")
     private Users add(@RequestBody Users users){

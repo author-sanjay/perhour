@@ -28,6 +28,17 @@ public class UserServiceImpl implements UserService {
     private WalletDao walletDao;
 
     @Override
+    public boolean verifyusername(String username) {
+        Optional<Users> user=usersDao.findByUsername(username);
+        if(user.isPresent()){
+            return false;
+        }
+        else{
+            return  true;
+        }
+    }
+
+    @Override
     public Users add(Users users) {
         users.setBidsleft(10);
         Wallet wal=new Wallet();

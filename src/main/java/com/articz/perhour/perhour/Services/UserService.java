@@ -9,6 +9,7 @@ import java.util.List;
 @Service
 public interface UserService {
 
+    public boolean verifyusername(String username);
     public Users add(Users users);
 
     public Users update(Users users);
