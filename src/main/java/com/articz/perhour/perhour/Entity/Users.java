@@ -58,11 +58,13 @@ public class Users {
     @OneToMany(mappedBy = "givento")
     @JsonIgnore
     private List<Projects> projects;
+
+    private long priority;
     public Users() {
         super();
     }
 
-    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, long bidsleft, float star, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects) {
+    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, long bidsleft, float star, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects, long priority) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -85,6 +87,7 @@ public class Users {
         this.membership = membership;
         this.wallet = wallet;
         this.projects = projects;
+        this.priority = priority;
     }
 
     public long getId() {
@@ -261,5 +264,13 @@ public class Users {
 
     public void setProjects(List<Projects> projects) {
         this.projects = projects;
+    }
+
+    public long getPriority() {
+        return priority;
+    }
+
+    public void setPriority(long priority) {
+        this.priority = priority;
     }
 }
