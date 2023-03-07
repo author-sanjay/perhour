@@ -55,12 +55,13 @@ public class Projects {
 
     private String status;
     private  String taggs;
+    private boolean fixed;
     public Projects() {
         super();
     }
 
 
-    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, LocalDate postedon, Users givenby, List<String> tags, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, String paymentstatus, String status, String taggs) {
+    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, LocalDate postedon, Users givenby, List<String> tags, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, String paymentstatus, String status, String taggs, boolean fixed) {
         this.id = id;
         this.title = title;
         this.extend = extend;
@@ -81,6 +82,7 @@ public class Projects {
         this.paymentstatus = paymentstatus;
         this.status = status;
         this.taggs = taggs;
+        this.fixed = fixed;
     }
 
     public long getId() {
@@ -241,5 +243,13 @@ public class Projects {
 
     public void setTaggs(String taggs) {
         this.taggs = taggs;
+    }
+
+    public boolean isFixed() {
+        return fixed;
+    }
+
+    public void setFixed(boolean fixed) {
+        this.fixed = fixed;
     }
 }

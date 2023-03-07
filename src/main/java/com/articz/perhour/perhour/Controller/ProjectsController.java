@@ -29,6 +29,10 @@ public class ProjectsController {
         return  this.projectService.update(projects);
     }
 
+    @GetMapping(path = "/getlatest")
+    public  List<Projects> getlatest(){
+        return  this.projectService.getlatest();
+    }
     @DeleteMapping(path = "/delete/{id}")
     public Projects delete(@PathVariable long id){
         return  this.projectService.delete(id);
