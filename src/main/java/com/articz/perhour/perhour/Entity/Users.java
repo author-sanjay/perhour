@@ -44,6 +44,8 @@ public class Users {
 
     private LocalDate membershipexpiry;
 
+    private String photo;
+
     @OneToOne
     @JsonIgnore
     @JoinColumn(name = "membership_id")
@@ -60,7 +62,7 @@ public class Users {
         super();
     }
 
-    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, long bidsleft, float star, LocalDate membershipexpiry, Membership membership, Wallet wallet, List<Projects> projects) {
+    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, long bidsleft, float star, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -79,6 +81,7 @@ public class Users {
         this.bidsleft = bidsleft;
         this.star = star;
         this.membershipexpiry = membershipexpiry;
+        this.photo = photo;
         this.membership = membership;
         this.wallet = wallet;
         this.projects = projects;
@@ -226,6 +229,14 @@ public class Users {
 
     public void setMembershipexpiry(LocalDate membershipexpiry) {
         this.membershipexpiry = membershipexpiry;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public Membership getMembership() {
