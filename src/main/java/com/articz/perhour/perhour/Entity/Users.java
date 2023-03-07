@@ -30,11 +30,11 @@ public class Users {
 
     private String role;
 
-    private String bankname;
+    private String bankingname;
 
     private String accountnumber;
 
-    private String ifsc;
+    private String withdrawltype;
 
     private String billingaddress;
 
@@ -64,7 +64,7 @@ public class Users {
         super();
     }
 
-    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, long bidsleft, float star, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects, long priority) {
+    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankingname, String accountnumber, String withdrawltype, String billingaddress, long bidsleft, float star, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects, long priority) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -76,9 +76,9 @@ public class Users {
         this.username = username;
         this.password = password;
         this.role = role;
-        this.bankname = bankname;
+        this.bankingname = bankingname;
         this.accountnumber = accountnumber;
-        this.ifsc = ifsc;
+        this.withdrawltype = withdrawltype;
         this.billingaddress = billingaddress;
         this.bidsleft = bidsleft;
         this.star = star;
@@ -178,12 +178,12 @@ public class Users {
         this.role = role;
     }
 
-    public String getBankname() {
-        return bankname;
+    public String getBankingname() {
+        return bankingname;
     }
 
-    public void setBankname(String bankname) {
-        this.bankname = bankname;
+    public void setBankingname(String bankingname) {
+        this.bankingname = bankingname;
     }
 
     public String getAccountnumber() {
@@ -194,12 +194,12 @@ public class Users {
         this.accountnumber = accountnumber;
     }
 
-    public String getIfsc() {
-        return ifsc;
+    public String getWithdrawltype() {
+        return withdrawltype;
     }
 
-    public void setIfsc(String ifsc) {
-        this.ifsc = ifsc;
+    public void setWithdrawltype(String withdrawltype) {
+        this.withdrawltype = withdrawltype;
     }
 
     public String getBillingaddress() {

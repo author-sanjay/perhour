@@ -69,7 +69,11 @@ public class UserServiceImpl implements UserService {
         Optional<Users> users1=usersDao.findById(users.getId());
         if(users1.isPresent()){
             Users users2=users1.get();
-            users2=users;
+            users2.setPhone(users.getPhone());
+            users2.setAddress(users.getAddress());
+            users2.setWithdrawltype(users.getWithdrawltype());
+            users2.setAccountnumber(users.getAccountnumber());
+            users2.setBankingname(users.getBankingname());
             usersDao.save(users2);
             return users2;
         }

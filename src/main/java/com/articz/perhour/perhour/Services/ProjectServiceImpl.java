@@ -27,11 +27,14 @@ public class ProjectServiceImpl implements ProjectService{
         Optional<Users> users=usersDao.findById(id);
         if(users.isPresent()){
             ArrayList<String> tagss=new ArrayList<>();
+            if(project.getTaggs()!=null){
             String st[]=project.getTaggs().split(",");
             for(String sr:st){
                 tagss.add(sr);
 
             }
+            }
+            project.setActive(true);
             project.setPostedon(LocalDate.now());
             project.setTags(tagss);
             project.setGivenby(users.get());

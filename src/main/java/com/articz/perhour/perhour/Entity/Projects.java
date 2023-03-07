@@ -30,6 +30,9 @@ public class Projects {
     private String timelimit;
 
     private LocalDate postedon;
+    private String category;
+
+    private String experience;
 
     @OneToOne
     @JoinColumn(name = "givenby_id")
@@ -51,6 +54,7 @@ public class Projects {
 
     private String paymentid;
 
+    private boolean active;
     private String paymentstatus;
 
     private String status;
@@ -61,7 +65,7 @@ public class Projects {
     }
 
 
-    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, LocalDate postedon, Users givenby, List<String> tags, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, String paymentstatus, String status, String taggs, boolean fixed) {
+    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, LocalDate postedon, String category, String experience, Users givenby, List<String> tags, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, boolean active, String paymentstatus, String status, String taggs, boolean fixed) {
         this.id = id;
         this.title = title;
         this.extend = extend;
@@ -73,16 +77,20 @@ public class Projects {
         this.lastdate = lastdate;
         this.timelimit = timelimit;
         this.postedon = postedon;
+        this.category = category;
+        this.experience = experience;
         this.givenby = givenby;
         this.tags = tags;
         this.givento = givento;
         this.bids = bids;
         this.paymentdone = paymentdone;
         this.paymentid = paymentid;
+        this.active = active;
         this.paymentstatus = paymentstatus;
         this.status = status;
         this.taggs = taggs;
         this.fixed = fixed;
+
     }
 
     public long getId() {
@@ -173,6 +181,22 @@ public class Projects {
         this.postedon = postedon;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
     public Users getGivenby() {
         return givenby;
     }
@@ -219,6 +243,14 @@ public class Projects {
 
     public void setPaymentid(String paymentid) {
         this.paymentid = paymentid;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public String getPaymentstatus() {
