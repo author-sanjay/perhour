@@ -26,6 +26,11 @@ public class UserController {
         return  this.userService.add(users);
     }
 
+    @PostMapping("/login/{id}/{id1}")
+    private Users add(@PathVariable String id,@PathVariable String id1){
+        return  this.userService.login(id,id1);
+    }
+
     //done
     @PostMapping("/update")
     private Users update(@RequestBody Users users){

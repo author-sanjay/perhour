@@ -12,6 +12,8 @@ public interface UserService {
     public boolean verifyusername(String username);
     public Users add(Users users);
 
+    public Users login(String email, String password);
+
     public Users update(Users users);
 
     public Users remove(long id);

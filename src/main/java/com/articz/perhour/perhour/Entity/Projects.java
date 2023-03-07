@@ -29,6 +29,8 @@ public class Projects {
 
     private String timelimit;
 
+    private LocalDate postedon;
+
     @OneToOne
     @JoinColumn(name = "givenby_id")
     @JsonIgnore
@@ -58,7 +60,7 @@ public class Projects {
     }
 
 
-    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, Users givenby, List<String> tags, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, String paymentstatus, String status, String taggs) {
+    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, LocalDate postedon, Users givenby, List<String> tags, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, String paymentstatus, String status, String taggs) {
         this.id = id;
         this.title = title;
         this.extend = extend;
@@ -69,6 +71,7 @@ public class Projects {
         this.startdate = startdate;
         this.lastdate = lastdate;
         this.timelimit = timelimit;
+        this.postedon = postedon;
         this.givenby = givenby;
         this.tags = tags;
         this.givento = givento;
@@ -158,6 +161,14 @@ public class Projects {
 
     public void setTimelimit(String timelimit) {
         this.timelimit = timelimit;
+    }
+
+    public LocalDate getPostedon() {
+        return postedon;
+    }
+
+    public void setPostedon(LocalDate postedon) {
+        this.postedon = postedon;
     }
 
     public Users getGivenby() {

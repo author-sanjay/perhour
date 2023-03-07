@@ -14,7 +14,7 @@ public class Users {
 
     private String firstname;
     private String lastname;
-    private LocalDate dateofbirth;
+    private String dateofbirth;
 
     private String address;
 
@@ -60,7 +60,7 @@ public class Users {
         super();
     }
 
-    public Users(long id, String firstname, String lastname, LocalDate dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, long bidsleft, float star, LocalDate membershipexpiry, Membership membership, Wallet wallet, List<Projects> projects) {
+    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankname, String accountnumber, String ifsc, String billingaddress, long bidsleft, float star, LocalDate membershipexpiry, Membership membership, Wallet wallet, List<Projects> projects) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -108,11 +108,11 @@ public class Users {
         this.lastname = lastname;
     }
 
-    public LocalDate getDateofbirth() {
+    public String getDateofbirth() {
         return dateofbirth;
     }
 
-    public void setDateofbirth(LocalDate dateofbirth) {
+    public void setDateofbirth(String dateofbirth) {
         this.dateofbirth = dateofbirth;
     }
 

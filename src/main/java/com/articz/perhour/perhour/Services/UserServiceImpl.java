@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
         Wallet wal=new Wallet();
         users.setWallet(wal);
 
+
         Users users1=usersDao.save(users);
         wal.setUser(users1);
         wal.setBalance(0);
@@ -52,6 +53,15 @@ public class UserServiceImpl implements UserService {
         return users;
 
 
+    }
+
+    @Override
+    public Users login(String email, String password) {
+        Optional<Users> user=usersDao.findByEmailAndPassword(email, password);
+        if(user.isPresent()){
+            return  user.get();
+        }
+        return null;
     }
 
     @Override

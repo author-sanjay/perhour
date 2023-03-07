@@ -8,6 +8,7 @@ import com.articz.perhour.perhour.Entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +32,7 @@ public class ProjectServiceImpl implements ProjectService{
                 tagss.add(sr);
 
             }
+            project.setPostedon(LocalDate.now());
             project.setTags(tagss);
             project.setGivenby(users.get());
             projectsDao.save(project);
@@ -118,6 +120,18 @@ public class ProjectServiceImpl implements ProjectService{
                 if(tg.equals(st)){
                     ans.add(pr.get(i));
                 }
+            }
+        }
+        return ans;
+    }
+
+    @Override
+    public List<Projects> getlatest() {
+        List<Projects> projects=projectsDao.findAll();
+        ArrayList<Projects> ans=new ArrayList<>();
+        for(int i=0;i<projects.size();i++){
+            if((projects.get(i).getPostedon().equals(LocalDate.now())) || (projects.get(i).getPostedon().equals(LocalDate.now().minusDays(1)))){
+                ans.add(projects.get(i));
             }
         }
         return ans;

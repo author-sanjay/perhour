@@ -21,5 +21,7 @@ public interface ProjectService {
 
     public List<Projects> bytags(String st);
 
+    public List<Projects> getlatest();
+
 
 }
