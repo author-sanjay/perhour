@@ -40,6 +40,7 @@ public class BidServiceImpl implements BidsService{
                 List<Bids> bids=projects1.getBids();
                 bids.add(bid);
                 projects1.setBids(bids);
+                projects1.setTotalbids(projects1.getTotalbids()+1);
                 projectsDao.save(projects1);
                 users1.setBidsleft(users1.getBidsleft()-1);
                 usersDao.save(users1);

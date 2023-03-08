@@ -23,7 +23,10 @@ public class Bids {
     private Projects project;
 
 
+    private long revisions;
     private long price;
+
+    private long proposedtime;
 
     private LocalDate biddate;
 
@@ -33,11 +36,13 @@ public class Bids {
         super();
     }
 
-    public Bids(long id, Users bidby, Projects project, long price, LocalDate biddate, String biddescription) {
+    public Bids(long id, Users bidby, Projects project, long revisions, long price, long proposedtime, LocalDate biddate, String biddescription) {
         this.id = id;
         this.bidby = bidby;
         this.project = project;
+        this.revisions = revisions;
         this.price = price;
+        this.proposedtime = proposedtime;
         this.biddate = biddate;
         this.biddescription = biddescription;
     }
@@ -66,12 +71,28 @@ public class Bids {
         this.project = project;
     }
 
+    public long getRevisions() {
+        return revisions;
+    }
+
+    public void setRevisions(long revisions) {
+        this.revisions = revisions;
+    }
+
     public long getPrice() {
         return price;
     }
 
     public void setPrice(long price) {
         this.price = price;
+    }
+
+    public long getProposedtime() {
+        return proposedtime;
+    }
+
+    public void setProposedtime(long proposedtime) {
+        this.proposedtime = proposedtime;
     }
 
     public LocalDate getBiddate() {
