@@ -30,23 +30,42 @@ public class BidServiceImpl implements BidsService{
         Optional<Users > users=usersDao.findById(id);
         Optional<Projects> projects=projectsDao.findById(project);
         if(users.isPresent() && projects.isPresent()){
-            Users users1=users.get();
-            if(users1.getBidsleft()>0){
-                Projects projects1=projects.get();
-                bid.setProject(projects1);
-                bid.setBiddate(LocalDate.now());
-                bid.setBidby(users1);
-                bidsDao.save(bid);
-                List<Bids> bids=projects1.getBids();
-                bids.add(bid);
-                projects1.setBids(bids);
-                projects1.setTotalbids(projects1.getTotalbids()+1);
-                projectsDao.save(projects1);
-                users1.setBidsleft(users1.getBidsleft()-1);
-                usersDao.save(users1);
-                return bid;
-            }else{
+
+            if(projects.get().getGivenby().getId()==id){
                 return null;
+            }else{
+                boolean flag=false;
+                List<Bids> bidss=projects.get().getBids();
+                for(int i=0;i<bidss.size();i++){
+                    if(bidss.get(i).getBidby().getId()==id){
+                        flag=true;
+                        break;
+                    }
+                }
+                if(flag){
+                    return null;
+                }else{
+
+                    Users users1=users.get();
+                    if(users1.getBidsleft()>0){
+                        Projects projects1=projects.get();
+                        bid.setProject(projects1);
+                        bid.setBiddate(LocalDate.now());
+                        bid.setBidby(users1);
+                        bidsDao.save(bid);
+                        List<Bids> bids=projects1.getBids();
+                        bids.add(bid);
+                        projects1.setBids(bids);
+                        projects1.setTotalbids(projects1.getTotalbids()+1);
+                        projectsDao.save(projects1);
+                        users1.setBidsleft(users1.getBidsleft()-1);
+                        usersDao.save(users1);
+                        return bid;
+                    }else{
+                        return null;
+
+                    }
+                }
             }
 
         }
