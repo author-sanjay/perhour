@@ -172,4 +172,22 @@ public class ProjectServiceImpl implements ProjectService{
         }
         return ans;
     }
+
+    @Override
+    public Projects assignproject(long userid, long projectid) {
+        Optional<Users> user=usersDao.findById(userid);
+        Optional<Projects> pr=projectsDao.findById(projectid);
+        if(user.isPresent() && pr.isPresent()){
+            pr.get().setGivento(user.get());
+            pr.get().setStatus("Assigned");
+            pr.get().setAssignedtoid(user.get().getId());
+           Projects pr2= projectsDao.save(pr.get());
+            List<Projects> projects=user.get().getProjects();
+            projects.add(pr2);
+            user.get().setProjects(projects);
+            usersDao.save(user.get());
+            return pr2;
+        }
+        return null;
+    }
 }

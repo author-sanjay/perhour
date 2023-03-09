@@ -26,5 +26,6 @@ public interface ProjectService {
 
     public List<Projects> getlatest();
 
+    public Projects assignproject(long userid, long projectid);
 
 }

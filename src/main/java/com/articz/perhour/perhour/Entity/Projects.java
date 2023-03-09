@@ -32,6 +32,8 @@ public class Projects {
     private LocalDate postedon;
     private String category;
 
+    private  long assignedtoid;
+
     private String experience;
 
     @OneToOne
@@ -65,7 +67,7 @@ public class Projects {
     }
 
 
-    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, LocalDate postedon, String category, String experience, Users givenby, List<String> tags, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, boolean active, String paymentstatus, String status, String taggs, boolean fixed) {
+    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, LocalDate postedon, String category, long assignedtoid, String experience, Users givenby, List<String> tags, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, boolean active, String paymentstatus, String status, String taggs, boolean fixed) {
         this.id = id;
         this.title = title;
         this.extend = extend;
@@ -78,6 +80,7 @@ public class Projects {
         this.timelimit = timelimit;
         this.postedon = postedon;
         this.category = category;
+        this.assignedtoid = assignedtoid;
         this.experience = experience;
         this.givenby = givenby;
         this.tags = tags;
@@ -90,7 +93,6 @@ public class Projects {
         this.status = status;
         this.taggs = taggs;
         this.fixed = fixed;
-
     }
 
     public long getId() {
@@ -187,6 +189,14 @@ public class Projects {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public long getAssignedtoid() {
+        return assignedtoid;
+    }
+
+    public void setAssignedtoid(long assignedtoid) {
+        this.assignedtoid = assignedtoid;
     }
 
     public String getExperience() {

@@ -3,9 +3,12 @@ package com.articz.perhour.perhour.Controller;
 import com.articz.perhour.perhour.Entity.Membership;
 import com.articz.perhour.perhour.Entity.Projects;
 import com.articz.perhour.perhour.Services.ProjectService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController
@@ -64,5 +67,14 @@ public class ProjectsController {
     public Projects pay(@PathVariable long id){
         return  this.projectService.makepayment(id);
     }
+
+
+    @PostMapping(path = "/assignproject/{id}/{id2}")
+    public Projects assignproject(@PathVariable long id, @PathVariable long id2){
+        return this.projectService.assignproject(id,id2);
+
+    }
+
+
 
 }
