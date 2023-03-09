@@ -23,8 +23,12 @@ public class Bids {
     private Projects project;
 
 
+    private long userid;
     private long revisions;
     private long price;
+
+    private String username;
+
 
     private long proposedtime;
 
@@ -36,12 +40,14 @@ public class Bids {
         super();
     }
 
-    public Bids(long id, Users bidby, Projects project, long revisions, long price, long proposedtime, LocalDate biddate, String biddescription) {
+    public Bids(long id, Users bidby, Projects project, long userid, long revisions, long price, String username, long proposedtime, LocalDate biddate, String biddescription) {
         this.id = id;
         this.bidby = bidby;
         this.project = project;
+        this.userid = userid;
         this.revisions = revisions;
         this.price = price;
+        this.username = username;
         this.proposedtime = proposedtime;
         this.biddate = biddate;
         this.biddescription = biddescription;
@@ -71,6 +77,14 @@ public class Bids {
         this.project = project;
     }
 
+    public long getUserid() {
+        return userid;
+    }
+
+    public void setUserid(long userid) {
+        this.userid = userid;
+    }
+
     public long getRevisions() {
         return revisions;
     }
@@ -85,6 +99,14 @@ public class Bids {
 
     public void setPrice(long price) {
         this.price = price;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public long getProposedtime() {

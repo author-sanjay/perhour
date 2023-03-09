@@ -52,6 +52,8 @@ public class BidServiceImpl implements BidsService{
                         bid.setProject(projects1);
                         bid.setBiddate(LocalDate.now());
                         bid.setBidby(users1);
+                        bid.setUsername(users1.getFirstname()+users1.getLastname());
+bid.setUserid(users1.getId());
                         bidsDao.save(bid);
                         List<Bids> bids=projects1.getBids();
                         bids.add(bid);
