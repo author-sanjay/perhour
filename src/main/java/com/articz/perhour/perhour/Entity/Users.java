@@ -40,7 +40,7 @@ public class Users {
 
     private long bidsleft;
 
-    private float star;
+    private double star;
 
     private LocalDate membershipexpiry;
 
@@ -64,7 +64,7 @@ public class Users {
         super();
     }
 
-    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankingname, String accountnumber, String withdrawltype, String billingaddress, long bidsleft, float star, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects, long priority) {
+    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankingname, String accountnumber, String withdrawltype, String billingaddress, long bidsleft, double star, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects, long priority) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -218,11 +218,11 @@ public class Users {
         this.bidsleft = bidsleft;
     }
 
-    public float getStar() {
+    public double getStar() {
         return star;
     }
 
-    public void setStar(float star) {
+    public void setStar(double star) {
         this.star = star;
     }
 
