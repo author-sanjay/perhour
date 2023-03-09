@@ -36,6 +36,8 @@ public class Projects {
 
     private String experience;
 
+    private LocalDate deliverydate;
+
     @OneToOne
     @JoinColumn(name = "givenby_id")
     @JsonIgnore
@@ -59,6 +61,10 @@ public class Projects {
     private boolean active;
     private String paymentstatus;
 
+    private String feedback;
+
+    private double feedbackstars;
+
     private String status;
     private  String taggs;
     private boolean fixed;
@@ -67,7 +73,7 @@ public class Projects {
     }
 
 
-    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, LocalDate postedon, String category, long assignedtoid, String experience, Users givenby, List<String> tags, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, boolean active, String paymentstatus, String status, String taggs, boolean fixed) {
+    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, LocalDate postedon, String category, long assignedtoid, String experience, LocalDate deliverydate, Users givenby, List<String> tags, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, boolean active, String paymentstatus, String feedback, double feedbackstars, String status, String taggs, boolean fixed) {
         this.id = id;
         this.title = title;
         this.extend = extend;
@@ -82,6 +88,7 @@ public class Projects {
         this.category = category;
         this.assignedtoid = assignedtoid;
         this.experience = experience;
+        this.deliverydate = deliverydate;
         this.givenby = givenby;
         this.tags = tags;
         this.givento = givento;
@@ -90,6 +97,8 @@ public class Projects {
         this.paymentid = paymentid;
         this.active = active;
         this.paymentstatus = paymentstatus;
+        this.feedback = feedback;
+        this.feedbackstars = feedbackstars;
         this.status = status;
         this.taggs = taggs;
         this.fixed = fixed;
@@ -207,6 +216,14 @@ public class Projects {
         this.experience = experience;
     }
 
+    public LocalDate getDeliverydate() {
+        return deliverydate;
+    }
+
+    public void setDeliverydate(LocalDate deliverydate) {
+        this.deliverydate = deliverydate;
+    }
+
     public Users getGivenby() {
         return givenby;
     }
@@ -269,6 +286,22 @@ public class Projects {
 
     public void setPaymentstatus(String paymentstatus) {
         this.paymentstatus = paymentstatus;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    public double getFeedbackstars() {
+        return feedbackstars;
+    }
+
+    public void setFeedbackstars(double feedbackstars) {
+        this.feedbackstars = feedbackstars;
     }
 
     public String getStatus() {

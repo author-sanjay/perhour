@@ -28,4 +28,7 @@ public interface ProjectService {
 
     public Projects assignproject(long userid, long projectid);
 
+   public Projects revoke(long id);
+
+   public  Projects feedback(long id,Projects projects);
 }

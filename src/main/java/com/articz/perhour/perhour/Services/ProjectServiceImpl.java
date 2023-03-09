@@ -2,6 +2,7 @@ package com.articz.perhour.perhour.Services;
 
 import com.articz.perhour.perhour.Dao.ProjectsDao;
 import com.articz.perhour.perhour.Dao.UsersDao;
+import com.articz.perhour.perhour.Entity.Bids;
 import com.articz.perhour.perhour.Entity.Membership;
 import com.articz.perhour.perhour.Entity.Projects;
 import com.articz.perhour.perhour.Entity.Users;
@@ -44,8 +45,12 @@ public class ProjectServiceImpl implements ProjectService{
         if(all.size()>0){
             ArrayList<Projects> ans=new ArrayList<>();
             for(int i=0;i<all.size();i++){
+                if(all.get(i).getGivento()!=null){
                 if(all.get(i).getGivento().getId()==id){
                     ans.add(all.get(i));
+                }
+                }else{
+                    continue;
                 }
             }
 
@@ -178,8 +183,19 @@ public class ProjectServiceImpl implements ProjectService{
         Optional<Users> user=usersDao.findById(userid);
         Optional<Projects> pr=projectsDao.findById(projectid);
         if(user.isPresent() && pr.isPresent()){
+            if(pr.get().getGivento()!=null){
+                return null;
+            }else{
             pr.get().setGivento(user.get());
             pr.get().setStatus("Assigned");
+            List<Bids> bids=pr.get().getBids();
+            Bids bid=new Bids();
+            for(int i=0;i<bids.size();i++){
+                if(bids.get(i).getBidby().getId()==userid){
+                    bid=bids.get(i);
+                }
+            }
+            pr.get().setDeliverydate(LocalDate.now().plusDays(bid.getProposedtime()));
             pr.get().setAssignedtoid(user.get().getId());
            Projects pr2= projectsDao.save(pr.get());
             List<Projects> projects=user.get().getProjects();
@@ -187,7 +203,37 @@ public class ProjectServiceImpl implements ProjectService{
             user.get().setProjects(projects);
             usersDao.save(user.get());
             return pr2;
+            }
         }
         return null;
     }
+
+    @Override
+    public Projects revoke(long id) {
+        Optional<Projects> pr=projectsDao.findById(id);
+        if(pr.isPresent()){
+            pr.get().setStatus("Cancelled");
+            projectsDao.save(pr.get());
+            return pr.get();
+        }
+        return null;
+    }
+
+    @Override
+    public Projects feedback(long id, Projects projects) {
+        Optional<Projects> pr=projectsDao.findById(id);
+        if(pr.isPresent()){
+            pr.get().setFeedback(projects.getFeedback());
+            pr.get().setFeedbackstars(projects.getFeedbackstars());
+            projectsDao.save(pr.get());
+            Users ur=pr.get().getGivento();
+            long proj=ur.getProjects().size();
+            ur.setStar((ur.getStar()+projects.getFeedbackstars())/proj);
+            usersDao.save(ur);
+            return  pr.get();
+        }
+        return null;
+    }
+
+
 }

@@ -75,6 +75,19 @@ public class ProjectsController {
 
     }
 
+    @PostMapping(path = "/revoke/{id}")
+    public Projects revoke(@PathVariable long id){
+        return this.projectService.revoke(id);
+
+    }
+
+    @PostMapping(path = "/feedback/{id}")
+    public Projects revoke(@PathVariable long id,@RequestBody Projects pr){
+        return this.projectService.feedback(id,pr);
+
+    }
+
+
 
 
 }
