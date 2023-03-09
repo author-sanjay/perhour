@@ -7,6 +7,9 @@ import java.util.List;
 
 @Service
 public interface ProjectService {
+
+    public List<Projects> posted(long id);
+    public  List<Projects> assigned(long id);
     public Projects add(Projects project,long id) ;
 
     public Projects update(Projects project) ;

@@ -22,6 +22,16 @@ public class ProjectsController {
         return  this.projectService.add(projects, id);
     }
 
+    @PostMapping(path = "/getposted/{id}")
+    public List<Projects> posted(@PathVariable long id){
+        return  this.projectService.posted(id);
+    }
+
+    @PostMapping(path = "/assigned/{id}")
+    public List<Projects> assigned(@PathVariable long id){
+        return  this.projectService.assigned(id);
+    }
+
 
 
     @PostMapping(path = "/update")

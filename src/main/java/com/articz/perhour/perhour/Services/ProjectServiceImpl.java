@@ -23,6 +23,38 @@ public class ProjectServiceImpl implements ProjectService{
     private UsersDao usersDao;
 
     @Override
+    public List<Projects> posted(long id) {
+        List<Projects> all=projectsDao.findAll();
+        if(all.size()>0){
+            ArrayList<Projects> ans=new ArrayList<>();
+            for(int i=0;i<all.size();i++){
+                if(all.get(i).getGivenby().getId()==id){
+                    ans.add(all.get(i));
+                }
+            }
+
+            return ans;
+        }
+        return null;
+    }
+
+    @Override
+    public List<Projects> assigned(long id) {
+        List<Projects> all =projectsDao.findAll();
+        if(all.size()>0){
+            ArrayList<Projects> ans=new ArrayList<>();
+            for(int i=0;i<all.size();i++){
+                if(all.get(i).getGivento().getId()==id){
+                    ans.add(all.get(i));
+                }
+            }
+
+            return ans;
+        }
+        return null;
+    }
+
+    @Override
     public Projects add(Projects project,long id) {
         Optional<Users> users=usersDao.findById(id);
         if(users.isPresent()){
@@ -35,6 +67,7 @@ public class ProjectServiceImpl implements ProjectService{
             }
             }
             project.setActive(true);
+            project.setStatus("Placed");
             project.setPostedon(LocalDate.now());
             project.setTags(tagss);
             project.setGivenby(users.get());
