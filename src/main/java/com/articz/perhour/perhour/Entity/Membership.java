@@ -18,6 +18,7 @@ public class Membership {
 
     private long price;
 
+    private boolean montly;
     private long extendedbids;
 
     private long duration;
@@ -31,11 +32,12 @@ public class Membership {
         super();
     }
 
-    public Membership(long id, String name, String description, long price, long extendedbids, long duration, List<Users> users) {
+    public Membership(long id, String name, String description, long price, boolean montly, long extendedbids, long duration, List<Users> users) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.montly = montly;
         this.extendedbids = extendedbids;
         this.duration = duration;
         this.users = users;
@@ -71,6 +73,14 @@ public class Membership {
 
     public void setPrice(long price) {
         this.price = price;
+    }
+
+    public boolean isMontly() {
+        return montly;
+    }
+
+    public void setMontly(boolean montly) {
+        this.montly = montly;
     }
 
     public long getExtendedbids() {

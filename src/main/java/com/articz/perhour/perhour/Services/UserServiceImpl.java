@@ -117,7 +117,11 @@ public class UserServiceImpl implements UserService {
                 users1.setIsmember(true);
                 users1.setMembership(membership1.get());
                 users1.setBidsleft(users1.getBidsleft()+membership1.get().getExtendedbids());
-                users1.setMembershipexpiry(users1.getMembershipexpiry().plusDays(membership1.get().getDuration()));
+                if(users1.getMembershipexpiry()!=null){
+                users1.setMembershipexpiry(users1.getMembershipexpiry().plusDays(membership1.get().getDuration()));}
+                else {
+                    users1.setMembershipexpiry(LocalDate.now().plusDays(membership1.get().getDuration()));
+                }
             }
             usersDao.save(users1);
             return users1;
