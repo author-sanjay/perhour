@@ -227,8 +227,16 @@ public class ProjectServiceImpl implements ProjectService{
             pr.get().setFeedbackstars(projects.getFeedbackstars());
             projectsDao.save(pr.get());
             Users ur=pr.get().getGivento();
-            long proj=ur.getProjects().size();
-            ur.setStar((ur.getStar()+projects.getFeedbackstars())/proj);
+            ur.setTotalstars(ur.getTotalstars()+projects.getFeedbackstars());
+            List<Projects> prr=ur.getProjects();
+            long count=0;
+            for(int i=0;i<prr.size();i++){
+                if(prr.get(i).getStatus().equals("Completed")){
+                    count++;
+                }
+            }
+            ur.setStar(ur.getTotalstars()/count);
+//            ur.setStar((ur.getStar()+projects.getFeedbackstars())/proj);
             usersDao.save(ur);
             return  pr.get();
         }

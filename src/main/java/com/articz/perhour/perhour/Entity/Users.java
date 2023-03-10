@@ -20,6 +20,7 @@ public class Users {
 
     private String country;
 
+    private double totalstars;
     private String phone;
 
     private String email;
@@ -42,6 +43,9 @@ public class Users {
 
     private double star;
 
+    private boolean ismember;
+
+    private long membershipid;
     private LocalDate membershipexpiry;
 
     private String photo;
@@ -64,13 +68,14 @@ public class Users {
         super();
     }
 
-    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, String phone, String email, String username, String password, String role, String bankingname, String accountnumber, String withdrawltype, String billingaddress, long bidsleft, double star, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects, long priority) {
+    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, double totalstars, String phone, String email, String username, String password, String role, String bankingname, String accountnumber, String withdrawltype, String billingaddress, long bidsleft, double star, boolean ismember, long membershipid, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects, long priority) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.dateofbirth = dateofbirth;
         this.address = address;
         this.country = country;
+        this.totalstars = totalstars;
         this.phone = phone;
         this.email = email;
         this.username = username;
@@ -82,6 +87,8 @@ public class Users {
         this.billingaddress = billingaddress;
         this.bidsleft = bidsleft;
         this.star = star;
+        this.ismember = ismember;
+        this.membershipid = membershipid;
         this.membershipexpiry = membershipexpiry;
         this.photo = photo;
         this.membership = membership;
@@ -136,6 +143,14 @@ public class Users {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public double getTotalstars() {
+        return totalstars;
+    }
+
+    public void setTotalstars(double totalstars) {
+        this.totalstars = totalstars;
     }
 
     public String getPhone() {
@@ -224,6 +239,22 @@ public class Users {
 
     public void setStar(double star) {
         this.star = star;
+    }
+
+    public boolean isIsmember() {
+        return ismember;
+    }
+
+    public void setIsmember(boolean ismember) {
+        this.ismember = ismember;
+    }
+
+    public long getMembershipid() {
+        return membershipid;
+    }
+
+    public void setMembershipid(long membershipid) {
+        this.membershipid = membershipid;
     }
 
     public LocalDate getMembershipexpiry() {

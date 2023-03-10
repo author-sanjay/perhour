@@ -113,6 +113,8 @@ public class UserServiceImpl implements UserService {
             Users users1=users.get();
             Optional<Membership> membership1=membershipDao.findById(membership);
             if(membership1.isPresent()){
+                users1.setMembershipid(membership1.get().getId());
+                users1.setIsmember(true);
                 users1.setMembership(membership1.get());
                 users1.setBidsleft(users1.getBidsleft()+membership1.get().getExtendedbids());
                 users1.setMembershipexpiry(users1.getMembershipexpiry().plusDays(membership1.get().getDuration()));
@@ -131,6 +133,8 @@ public class UserServiceImpl implements UserService {
             Optional<Membership> membership1=membershipDao.findById(membership);
             if(membership1.isPresent()) {
                 Users users1 = users.get();
+                users1.setIsmember(false);
+                users1.setMembershipid(0);
                 users1.setMembership(null);
                 users1.setMembershipexpiry(LocalDate.now());
                 usersDao.save(users1);
