@@ -43,6 +43,10 @@ public class Users {
 
     private double star;
 
+    private String headline;
+
+    private double rates;
+
     private boolean ismember;
 
     private long membershipid;
@@ -54,6 +58,9 @@ public class Users {
     @JsonIgnore
     @JoinColumn(name = "membership_id")
     private Membership membership;
+
+
+
 
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -68,7 +75,7 @@ public class Users {
         super();
     }
 
-    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, double totalstars, String phone, String email, String username, String password, String role, String bankingname, String accountnumber, String withdrawltype, String billingaddress, long bidsleft, double star, boolean ismember, long membershipid, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects, long priority) {
+    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, double totalstars, String phone, String email, String username, String password, String role, String bankingname, String accountnumber, String withdrawltype, String billingaddress, long bidsleft, double star, String headline, double rates, boolean ismember, long membershipid, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects, long priority) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -87,6 +94,8 @@ public class Users {
         this.billingaddress = billingaddress;
         this.bidsleft = bidsleft;
         this.star = star;
+        this.headline = headline;
+        this.rates = rates;
         this.ismember = ismember;
         this.membershipid = membershipid;
         this.membershipexpiry = membershipexpiry;
@@ -239,6 +248,22 @@ public class Users {
 
     public void setStar(double star) {
         this.star = star;
+    }
+
+    public String getHeadline() {
+        return headline;
+    }
+
+    public void setHeadline(String headline) {
+        this.headline = headline;
+    }
+
+    public double getRates() {
+        return rates;
+    }
+
+    public void setRates(double rates) {
+        this.rates = rates;
     }
 
     public boolean isIsmember() {

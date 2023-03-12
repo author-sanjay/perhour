@@ -63,6 +63,12 @@ public class ProjectsController {
         return  this.projectService.getsingle(id);
     }
 
+
+    @GetMapping(path = "/getbycategory/{id}")
+    public List<Projects> cat(@PathVariable String id){
+        return  this.projectService.bycategory(id);
+    }
+
     @PostMapping(path = "/makepayment/{id}")
     public Projects pay(@PathVariable long id){
         return  this.projectService.makepayment(id);

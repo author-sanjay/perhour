@@ -273,5 +273,10 @@ return pr.get();
         return null;
     }
 
+    @Override
+    public List<Projects> bycategory(String category) {
+        return projectsDao.findByCategory(category);
+    }
+
 
 }

@@ -33,4 +33,6 @@ public interface ProjectService {
    public  Projects feedback(long id,Projects projects);
 
    public  Projects complete(long id);
+
+   public List<Projects> bycategory(String category);
 }
