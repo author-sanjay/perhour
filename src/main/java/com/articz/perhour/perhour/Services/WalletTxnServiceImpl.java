@@ -68,4 +68,24 @@ public class WalletTxnServiceImpl implements WalletTxnService{
         }
         return null;
     }
+
+    @Override
+    public WalletTxn withdraw(long uid, float amount) {
+        Optional< Users> users=usersDao.findById(uid);
+        if(users.isPresent()){
+            if(users.get().getWallet().getBalance()>=amount){
+                WalletTxn txn=new WalletTxn();
+                txn.setIncoming(false);
+                txn.setWallet(users.get().getWallet());
+                txn.setAmount(amount);
+                txn.setDate(LocalDate.now());
+                walletTxnDao.save(txn);
+                Wallet wallet=users.get().getWallet();
+                wallet.setBalance(wallet.getBalance()-txn.getAmount());
+                walletDao.save(wallet);
+                return txn;
+            }
+        }
+        return null;
+    }
 }

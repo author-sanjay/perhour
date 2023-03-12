@@ -257,10 +257,11 @@ public class ProjectServiceImpl implements ProjectService{
             projectsDao.save(pr.get());
             WalletTxn txn=new WalletTxn();
             txn.setDate(LocalDate.now());
+            txn.setIncoming(true);
             txn.setWallet(pr.get().getGivento().getWallet());
             txn.setAmount((float) (pr.get().getPrice()*0.9));
             walletTxnService.add(txn,pr.get().getGivento().getId());
-
+return pr.get();
 
         }
         return null;
