@@ -5,6 +5,7 @@ import com.articz.perhour.perhour.Dao.UsersDao;
 import com.articz.perhour.perhour.Dao.WalletDao;
 import com.articz.perhour.perhour.Dao.WalletTxnDao;
 import com.articz.perhour.perhour.Entity.*;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -255,8 +256,13 @@ public class ProjectServiceImpl implements ProjectService{
         if(pr.isPresent()){
             pr.get().setStatus("Completed");
             projectsDao.save(pr.get());
+            Users user=pr.get().getGivento();
+            user.setPriority(user.getPriority()+1);
+            usersDao.save(user);
             WalletTxn txn=new WalletTxn();
             txn.setDate(LocalDate.now());
+            txn.setProjectid(id);
+            txn.setProjecttitle(pr.get().getTitle());
             txn.setIncoming(true);
             txn.setWallet(pr.get().getGivento().getWallet());
             txn.setAmount((float) (pr.get().getPrice()*0.9));

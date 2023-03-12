@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
         users.setBidsleft(10);
         Wallet wal=new Wallet();
         users.setWallet(wal);
+        users.setPriority(5);
 
 
         Users users1=usersDao.save(users);
@@ -117,6 +118,14 @@ public class UserServiceImpl implements UserService {
                 users1.setIsmember(true);
                 users1.setMembership(membership1.get());
                 users1.setBidsleft(users1.getBidsleft()+membership1.get().getExtendedbids());
+                if(membership1.get().getId()==6 || membership1.get().getId()==7){
+                    users1.setPriority(users1.getPriority()+1);
+
+                }else if(membership1.get().getId()==5 || membership1.get().getId()==8){
+                    users1.setPriority(users1.getPriority()+3);
+                }else{
+                    users1.setPriority(users1.getPriority()+5);
+                }
                 if(users1.getMembershipexpiry()!=null){
                 users1.setMembershipexpiry(users1.getMembershipexpiry().plusDays(membership1.get().getDuration()));}
                 else {

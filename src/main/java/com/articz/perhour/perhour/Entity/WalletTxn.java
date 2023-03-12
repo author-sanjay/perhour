@@ -9,9 +9,12 @@ import java.time.LocalDate;
 public class WalletTxn {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+        private long id;
 
     private float amount;
+
+    private String projecttitle;
+    private long projectid;
 
     private LocalDate date;
 
@@ -26,9 +29,11 @@ public class WalletTxn {
         super();
     }
 
-    public WalletTxn(long id, float amount, LocalDate date, boolean incoming, Wallet wallet) {
+    public WalletTxn(long id, float amount, String projecttitle, long projectid, LocalDate date, boolean incoming, Wallet wallet) {
         this.id = id;
         this.amount = amount;
+        this.projecttitle = projecttitle;
+        this.projectid = projectid;
         this.date = date;
         this.incoming = incoming;
         this.wallet = wallet;
@@ -48,6 +53,22 @@ public class WalletTxn {
 
     public void setAmount(float amount) {
         this.amount = amount;
+    }
+
+    public String getProjecttitle() {
+        return projecttitle;
+    }
+
+    public void setProjecttitle(String projecttitle) {
+        this.projecttitle = projecttitle;
+    }
+
+    public long getProjectid() {
+        return projectid;
+    }
+
+    public void setProjectid(long projectid) {
+        this.projectid = projectid;
     }
 
     public LocalDate getDate() {

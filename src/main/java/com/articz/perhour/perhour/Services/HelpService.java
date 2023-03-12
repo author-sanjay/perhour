@@ -7,9 +7,11 @@ import java.util.List;
 
 @Service
 public interface HelpService {
-    public Helpandsupport add(Helpandsupport hep);
+    public Helpandsupport add(Helpandsupport hep, long id);
     public Helpandsupport getsingle(long id);
     public List<Helpandsupport > getactive();
 
     public Helpandsupport update(Helpandsupport helpService);
+
+    public Helpandsupport withdrawl(Helpandsupport helpService,double amount, String method, String name, String ac, long uid);
 }
