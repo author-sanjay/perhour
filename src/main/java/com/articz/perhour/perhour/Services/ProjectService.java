@@ -31,4 +31,6 @@ public interface ProjectService {
    public Projects revoke(long id);
 
    public  Projects feedback(long id,Projects projects);
+
+   public  Projects complete(long id);
 }

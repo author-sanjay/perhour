@@ -15,6 +15,8 @@ public class WalletTxn {
 
     private LocalDate date;
 
+    private boolean incoming;
+
     @ManyToOne
     @JoinColumn(name = "wallet_id")
     @JsonIgnore
@@ -24,11 +26,11 @@ public class WalletTxn {
         super();
     }
 
-    public WalletTxn(long id, float amount, LocalDate date, Wallet wallet) {
-
+    public WalletTxn(long id, float amount, LocalDate date, boolean incoming, Wallet wallet) {
         this.id = id;
         this.amount = amount;
         this.date = date;
+        this.incoming = incoming;
         this.wallet = wallet;
     }
 
@@ -54,6 +56,14 @@ public class WalletTxn {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public boolean isIncoming() {
+        return incoming;
+    }
+
+    public void setIncoming(boolean incoming) {
+        this.incoming = incoming;
     }
 
     public Wallet getWallet() {

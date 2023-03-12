@@ -2,10 +2,9 @@ package com.articz.perhour.perhour.Services;
 
 import com.articz.perhour.perhour.Dao.ProjectsDao;
 import com.articz.perhour.perhour.Dao.UsersDao;
-import com.articz.perhour.perhour.Entity.Bids;
-import com.articz.perhour.perhour.Entity.Membership;
-import com.articz.perhour.perhour.Entity.Projects;
-import com.articz.perhour.perhour.Entity.Users;
+import com.articz.perhour.perhour.Dao.WalletDao;
+import com.articz.perhour.perhour.Dao.WalletTxnDao;
+import com.articz.perhour.perhour.Entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +21,13 @@ public class ProjectServiceImpl implements ProjectService{
     public ProjectsDao projectsDao;
     @Autowired
     private UsersDao usersDao;
+    @Autowired
+    private WalletDao walletDao;
+    @Autowired
+    private WalletTxnDao walletTxnDao;
+
+    @Autowired
+    private  WalletTxnService walletTxnService;
 
     @Override
     public List<Projects> posted(long id) {
@@ -239,6 +245,23 @@ public class ProjectServiceImpl implements ProjectService{
 //            ur.setStar((ur.getStar()+projects.getFeedbackstars())/proj);
             usersDao.save(ur);
             return  pr.get();
+        }
+        return null;
+    }
+
+    @Override
+    public Projects complete(long id) {
+        Optional< Projects> pr=projectsDao.findById(id);
+        if(pr.isPresent()){
+            pr.get().setStatus("Completed");
+            projectsDao.save(pr.get());
+            WalletTxn txn=new WalletTxn();
+            txn.setDate(LocalDate.now());
+            txn.setWallet(pr.get().getGivento().getWallet());
+            txn.setAmount((float) (pr.get().getPrice()*0.9));
+            walletTxnService.add(txn,pr.get().getGivento().getId());
+
+
         }
         return null;
     }

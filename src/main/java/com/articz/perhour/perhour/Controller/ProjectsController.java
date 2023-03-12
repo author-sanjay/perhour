@@ -87,6 +87,12 @@ public class ProjectsController {
 
     }
 
+    @PostMapping(path = "/complete/{id}")
+    public Projects compleye(@PathVariable long id){
+        return this.projectService.complete(id);
+
+    }
+
 
 
 
