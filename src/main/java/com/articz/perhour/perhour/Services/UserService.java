@@ -22,6 +22,10 @@ public interface UserService {
 
     public List<Users> getall();
 
+    public List<Users> top3();
+
+    public List<Users> top15();
+
     public Users addMembership(long id,long membership);
 
     public  Users removeMembership(long id,long membership);

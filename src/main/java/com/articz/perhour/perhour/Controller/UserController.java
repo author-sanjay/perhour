@@ -5,6 +5,7 @@ import com.articz.perhour.perhour.Entity.Users;
 import com.articz.perhour.perhour.Entity.WalletTxn;
 import com.articz.perhour.perhour.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,6 +50,19 @@ public class UserController {
     @GetMapping("/getuser/{id}")
     private Users getUsers(@PathVariable long id){
         return  this.userService.get(id);
+    }
+
+
+    @GetMapping("/gettop")
+    private List<Users> top3(){
+        List<Users> top3=userService.top3();
+        return  top3;
+    }
+
+    @GetMapping("/gettop15")
+    private List<Users> top15(){
+        List<Users> top3=userService.top15();
+        return  top3;
     }
 
 

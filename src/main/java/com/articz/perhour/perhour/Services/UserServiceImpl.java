@@ -5,7 +5,10 @@ import com.articz.perhour.perhour.Dao.ProjectsDao;
 import com.articz.perhour.perhour.Dao.UsersDao;
 import com.articz.perhour.perhour.Dao.WalletDao;
 import com.articz.perhour.perhour.Entity.*;
+import org.hibernate.query.spi.Limit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -104,6 +107,34 @@ public class UserServiceImpl implements UserService {
     public List<Users> getall() {
 
         return usersDao.findAll();
+    }
+
+    @Override
+    public List<Users> top3() {
+        List<Users> users= usersDao.findAll(Sort.by("priority"));
+        ArrayList<Users> ans=new ArrayList<>();
+        for(int i=users.size()-1;i>=0;i--){
+            ans.add(users.get(i));
+            if(ans.size()==3){
+                break;
+            }
+        }
+
+        return  ans;
+    }
+
+    @Override
+    public List<Users> top15() {
+        List<Users> users= usersDao.findAll(Sort.by("priority"));
+        ArrayList<Users> ans=new ArrayList<>();
+        for(int i=users.size()-4;i>=0;i--){
+            ans.add(users.get(i));
+            if(ans.size()==15){
+                break;
+            }
+        }
+
+        return  ans;
     }
 
     @Override
