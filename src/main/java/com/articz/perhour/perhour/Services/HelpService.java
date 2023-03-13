@@ -1,17 +1,17 @@
 package com.articz.perhour.perhour.Services;
 
-import com.articz.perhour.perhour.Entity.Helpandsupport;
+import com.articz.perhour.perhour.Entity.HelpSupport;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public interface HelpService {
-    public Helpandsupport add(Helpandsupport hep, long id);
-    public Helpandsupport getsingle(long id);
-    public List<Helpandsupport > getactive();
+    public HelpSupport add(HelpSupport hep, long id);
+    public HelpSupport getsingle(long id);
+    public List<HelpSupport > getactive();
 
-    public Helpandsupport update(Helpandsupport helpService);
+    public HelpSupport update(HelpSupport helpService);
 
-    public Helpandsupport withdrawl(Helpandsupport helpService,double amount, String method, String name, String ac, long uid);
+    public HelpSupport withdrawl(HelpSupport helpService,double amount, String method, String name, String ac, long uid);
 }

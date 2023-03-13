@@ -2,7 +2,7 @@ package com.articz.perhour.perhour.Services;
 
 import com.articz.perhour.perhour.Dao.Helpdao;
 import com.articz.perhour.perhour.Dao.UsersDao;
-import com.articz.perhour.perhour.Entity.Helpandsupport;
+import com.articz.perhour.perhour.Entity.HelpSupport;
 import com.articz.perhour.perhour.Entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,11 +22,11 @@ public class HelpServiceimpl implements  HelpService{
 
 
     @Override
-    public Helpandsupport add(Helpandsupport hep,long id) {
+    public HelpSupport add(HelpSupport hep, long id) {
         Optional<Users> user=usersDao.findById(id);
         if(user.isPresent()){
             hep.setDate(LocalDate.now());
-            hep.setUser(user.get());
+            hep.setUsers(user.get());
             hep.setStatus("Active");
 
             return helpdao.save(hep);
@@ -36,8 +36,8 @@ return null
     }
 
     @Override
-    public Helpandsupport getsingle(long id) {
-        Optional<Helpandsupport> h=helpdao.findById(id);
+    public HelpSupport getsingle(long id) {
+        Optional<HelpSupport> h=helpdao.findById(id);
         if(h.isPresent()){
             return  h.get();
         }
@@ -45,9 +45,9 @@ return null
     }
 
     @Override
-    public List<Helpandsupport> getactive() {
-List<Helpandsupport> h=helpdao.findAll();
-        ArrayList<Helpandsupport> active=new ArrayList<>();
+    public List<HelpSupport> getactive() {
+List<HelpSupport> h=helpdao.findAll();
+        ArrayList<HelpSupport> active=new ArrayList<>();
         for(int i=0;i<h.size();i++){
             if(h.get(i).getStatus().equals("Active")){
                 active.add(h.get(i));
@@ -58,8 +58,8 @@ List<Helpandsupport> h=helpdao.findAll();
     }
 
     @Override
-    public Helpandsupport update(Helpandsupport helpService) {
-        Optional<Helpandsupport> h=helpdao.findById(helpService.getId());
+    public HelpSupport update(HelpSupport helpService) {
+        Optional<HelpSupport> h=helpdao.findById(helpService.getId());
         if(h.isPresent()){
             h.get().setStatus("Resolved");
         }
@@ -67,11 +67,11 @@ List<Helpandsupport> h=helpdao.findAll();
     }
 
     @Override
-    public Helpandsupport withdrawl(Helpandsupport hl,double amount, String method, String name, String ac, long uid) {
+    public HelpSupport withdrawl(HelpSupport hl,double amount, String method, String name, String ac, long uid) {
         Optional<Users> users=usersDao.findById(uid);
         if(users.isPresent()){
 
-            hl.setUser(users.get());
+            hl.setUsers(users.get());
             hl.setStatus("Active");
             hl.setDate(LocalDate.now());
             hl.setSubject("Withdraw");
