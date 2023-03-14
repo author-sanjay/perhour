@@ -268,7 +268,7 @@ public class UserServiceImpl implements UserService {
             ArrayList<Projects> active = new ArrayList<>();
             List<Projects> projects=users.get().getProjects();
             for(int i=0;i<projects.size();i++){
-                if(projects.get(i).getStatus().equals("COMPLETE")){
+                if(projects.get(i).getStatus().equals("Completed")){
                     active.add(projects.get(i));
                 }
             }

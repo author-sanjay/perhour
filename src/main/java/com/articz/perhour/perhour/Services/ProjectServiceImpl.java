@@ -83,6 +83,7 @@ public class ProjectServiceImpl implements ProjectService{
             project.setPostedon(LocalDate.now());
             project.setTags(tagss);
             project.setGivenby(users.get());
+            project.setGivenbyy(users.get().getFirstname()+" "+users.get().getLastname());
             projectsDao.save(project);
             return project;
         }

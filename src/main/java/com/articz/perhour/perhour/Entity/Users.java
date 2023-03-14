@@ -49,6 +49,7 @@ public class Users {
 
     private boolean ismember;
 
+    private String about;
     private long membershipid;
     private LocalDate membershipexpiry;
 
@@ -75,7 +76,7 @@ public class Users {
         super();
     }
 
-    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, double totalstars, String phone, String email, String username, String password, String role, String bankingname, String accountnumber, String withdrawltype, String billingaddress, long bidsleft, double star, String headline, double rates, boolean ismember, long membershipid, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects, long priority) {
+    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, double totalstars, String phone, String email, String username, String password, String role, String bankingname, String accountnumber, String withdrawltype, String billingaddress, long bidsleft, double star, String headline, double rates, boolean ismember, String about, long membershipid, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects, long priority) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -97,6 +98,7 @@ public class Users {
         this.headline = headline;
         this.rates = rates;
         this.ismember = ismember;
+        this.about = about;
         this.membershipid = membershipid;
         this.membershipexpiry = membershipexpiry;
         this.photo = photo;
@@ -272,6 +274,14 @@ public class Users {
 
     public void setIsmember(boolean ismember) {
         this.ismember = ismember;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
     }
 
     public long getMembershipid() {

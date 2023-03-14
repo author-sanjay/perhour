@@ -66,6 +66,8 @@ public class Projects {
     private double feedbackstars;
 
     private String status;
+
+    private String givenbyy;
     private  String taggs;
     private boolean fixed;
     public Projects() {
@@ -73,7 +75,7 @@ public class Projects {
     }
 
 
-    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, LocalDate postedon, String category, long assignedtoid, String experience, LocalDate deliverydate, Users givenby, List<String> tags, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, boolean active, String paymentstatus, String feedback, double feedbackstars, String status, String taggs, boolean fixed) {
+    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, LocalDate postedon, String category, long assignedtoid, String experience, LocalDate deliverydate, Users givenby, List<String> tags, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, boolean active, String paymentstatus, String feedback, double feedbackstars, String status, String givenbyy, String taggs, boolean fixed) {
         this.id = id;
         this.title = title;
         this.extend = extend;
@@ -100,6 +102,7 @@ public class Projects {
         this.feedback = feedback;
         this.feedbackstars = feedbackstars;
         this.status = status;
+        this.givenbyy = givenbyy;
         this.taggs = taggs;
         this.fixed = fixed;
     }
@@ -310,6 +313,14 @@ public class Projects {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getGivenbyy() {
+        return givenbyy;
+    }
+
+    public void setGivenbyy(String givenbyy) {
+        this.givenbyy = givenbyy;
     }
 
     public String getTaggs() {
