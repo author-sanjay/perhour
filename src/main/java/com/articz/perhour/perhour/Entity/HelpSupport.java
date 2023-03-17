@@ -15,6 +15,9 @@ public class HelpSupport {
 
     private String subject;
 
+    private String email;
+    private String phone;
+
     private LocalDate date;
 
     private String status;
@@ -23,10 +26,12 @@ public class HelpSupport {
     @JoinColumn(name = "users_id")
     private  Users users;
 
-    public HelpSupport(long id, String message, String subject, LocalDate date, String status, Users users) {
+    public HelpSupport(long id, String message, String subject, String email, String phone, LocalDate date, String status, Users users) {
         this.id = id;
         this.message = message;
         this.subject = subject;
+        this.email = email;
+        this.phone = phone;
         this.date = date;
         this.status = status;
         this.users = users;
@@ -58,6 +63,22 @@ public class HelpSupport {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public LocalDate getDate() {
