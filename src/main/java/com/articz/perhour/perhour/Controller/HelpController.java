@@ -29,6 +29,11 @@ public class HelpController {
         return this.helpService.update(helpandsupport);
     }
 
+    @PostMapping(path = "/resolve/{id}")
+    public HelpSupport resolve(@PathVariable long id){
+        return this.helpService.resolved(id);
+    }
+
     @GetMapping(path = "/getsingle/{id}")
     public HelpSupport getall(@PathVariable long id){
         return this.helpService.getsingle(id);

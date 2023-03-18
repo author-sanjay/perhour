@@ -81,4 +81,15 @@ List<HelpSupport> h=helpdao.findAll();
 
         return null;
     }
+
+    @Override
+    public HelpSupport resolved(long id) {
+        Optional<HelpSupport> hp = helpdao.findById(id);
+        if(hp.isPresent()){
+            hp.get().setStatus("Resolved");
+            helpdao.save(hp.get());
+            return  hp.get();
+        }
+        return null;
+    }
 }

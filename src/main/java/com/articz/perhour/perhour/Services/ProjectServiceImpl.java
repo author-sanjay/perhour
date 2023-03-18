@@ -276,7 +276,17 @@ return pr.get();
 
     @Override
     public List<Projects> bycategory(String category) {
-        return projectsDao.findByCategory(category);
+        List<Projects> pr= projectsDao.findByCategory(category);
+        ArrayList<Projects> ar=new ArrayList<>();
+        for (int i=0;i<pr.size();i++){
+            if(pr.get(i).getPostedon().isAfter(LocalDate.now().minusDays(3))){
+                if(pr.get(i).getStatus().equals("Placed")){
+                    ar.add(pr.get(i));
+                }
+            }
+        }
+
+        return ar;
     }
 
 

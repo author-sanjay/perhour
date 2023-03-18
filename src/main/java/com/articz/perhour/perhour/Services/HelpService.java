@@ -14,4 +14,5 @@ public interface HelpService {
     public HelpSupport update(HelpSupport helpService);
 
     public HelpSupport withdrawl(HelpSupport helpService,double amount, String method, String name, String ac, long uid);
+    public HelpSupport resolved(long id);
 }
