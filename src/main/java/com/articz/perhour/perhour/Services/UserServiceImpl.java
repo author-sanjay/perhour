@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService {
         Wallet wal=new Wallet();
         users.setWallet(wal);
         users.setPriority(5);
+        users.setRole("ROLE_USER");
 
 
 
@@ -74,11 +75,25 @@ public class UserServiceImpl implements UserService {
         Optional<Users> users1=usersDao.findById(users.getId());
         if(users1.isPresent()){
             Users users2=users1.get();
-            users2.setPhone(users.getPhone());
-            users2.setAddress(users.getAddress());
-            users2.setWithdrawltype(users.getWithdrawltype());
-            users2.setAccountnumber(users.getAccountnumber());
-            users2.setBankingname(users.getBankingname());
+            if(users.getPhone()!=null){
+                users2.setPhone(users.getPhone());
+            }
+            if(users.getAddress()!=null){
+                users2.setAddress(users.getAddress());
+            }
+            if(users.getWithdrawltype()!=null){
+                users2.setWithdrawltype(users.getWithdrawltype());
+            }
+            if(users.getAccountnumber()!=null){
+                users2.setAccountnumber(users.getAccountnumber());
+            }
+            if(users.getBankingname()!=null){
+                users2.setBankingname(users.getBankingname());
+            }
+            if(users.getPhoto()!=null){
+                users2.setPhoto(users.getPhoto());
+            }
+
             usersDao.save(users2);
             return users2;
         }
