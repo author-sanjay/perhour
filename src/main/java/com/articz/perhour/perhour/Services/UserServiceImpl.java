@@ -62,6 +62,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Users findbyusername(String username) {
+        List<Users> us=usersDao.findAll();
+        for(int i=0;i< us.size();i++){
+            if(us.get(i).getUsername().equals(username)){
+                return us.get(i);
+            }
+        }
+
+        return  null;
+    }
+
+    @Override
     public Users login(String email, String password) {
         Optional<Users> user=usersDao.findByEmailAndPassword(email, password);
         if(user.isPresent()){

@@ -123,6 +123,11 @@ public class UserController {
         return  this.userService.getcanceled(users);
     }
 
+    @GetMapping("/findbyusername/{id}")
+    private Users username(@PathVariable String id){
+        return  this.userService.findbyusername(id);
+    }
+
 
     //done
     @GetMapping("/getcompletedprojects/{users}")
