@@ -5,10 +5,10 @@ public class OrderRequest {
     private String customeremail;
     private  String phonenumber;
 
-    private  double amount;
+    private  long amount;
 
 
-    public OrderRequest(String customername, String customeremail, String phonenumber, double amount) {
+    public OrderRequest(String customername, String customeremail, String phonenumber, long amount) {
         this.customername = customername;
         this.customeremail = customeremail;
         this.phonenumber = phonenumber;
@@ -43,11 +43,11 @@ public class OrderRequest {
         this.phonenumber = phonenumber;
     }
 
-    public double getAmount() {
+    public long getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(long amount) {
         this.amount = amount;
     }
 }
