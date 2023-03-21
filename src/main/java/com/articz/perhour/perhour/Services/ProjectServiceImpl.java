@@ -1,14 +1,16 @@
 package com.articz.perhour.perhour.Services;
-
 import com.articz.perhour.perhour.Dao.ProjectsDao;
 import com.articz.perhour.perhour.Dao.UsersDao;
 import com.articz.perhour.perhour.Dao.WalletDao;
 import com.articz.perhour.perhour.Dao.WalletTxnDao;
 import com.articz.perhour.perhour.Entity.*;
+import com.razorpay.Order;
+import com.razorpay.RazorpayClient;
+import com.razorpay.RazorpayException;
 import org.apache.catalina.User;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,8 @@ import java.util.Optional;
 
 @Service
 public class ProjectServiceImpl implements ProjectService{
+
+//    RazorpayClient instance= new RazorpayClient("rzp_test_UdfAt8GHS33FEO","5B3PKHfKokclOrhcpCuIzc0y");
 
     @Autowired
     public ProjectsDao projectsDao;
@@ -29,6 +33,9 @@ public class ProjectServiceImpl implements ProjectService{
 
     @Autowired
     private  WalletTxnService walletTxnService;
+
+    @Autowired
+    private RazorPay razorPay;
 
     @Override
     public List<Projects> posted(long id) {
@@ -155,6 +162,7 @@ public class ProjectServiceImpl implements ProjectService{
         Optional<Projects> projects=projectsDao.findById(project);
         if(projects.isPresent()){
             /* TODO MAKE PAYMENT */
+
         }
         return null;
     }

@@ -5,6 +5,8 @@ import com.articz.perhour.perhour.Dao.ProjectsDao;
 import com.articz.perhour.perhour.Dao.UsersDao;
 import com.articz.perhour.perhour.Dao.WalletDao;
 import com.articz.perhour.perhour.Entity.*;
+import com.razorpay.Order;
+import org.aspectj.weaver.ast.Or;
 import org.hibernate.query.spi.Limit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +20,10 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+
+    @Autowired
+    public RazorPay razorPay;
 
     @Autowired
     public MembershipDao membershipDao;
@@ -173,26 +179,34 @@ public class UserServiceImpl implements UserService {
             Users users1=users.get();
             Optional<Membership> membership1=membershipDao.findById(membership);
             if(membership1.isPresent()){
-                users1.setMembershipid(membership1.get().getId());
-                users1.setIsmember(true);
-                users1.setMembership(membership1.get());
-                users1.setBidsleft(users1.getBidsleft()+membership1.get().getExtendedbids());
-                if(membership1.get().getId()==6 || membership1.get().getId()==7){
-                    users1.setPriority(users1.getPriority()+1);
 
-                }else if(membership1.get().getId()==5 || membership1.get().getId()==8){
-                    users1.setPriority(users1.getPriority()+3);
-                }else{
-                    users1.setPriority(users1.getPriority()+5);
+
+                    users1.setMembershipid(membership1.get().getId());
+                    users1.setIsmember(true);
+                    users1.setMembership(membership1.get());
+                    users1.setBidsleft(users1.getBidsleft()+membership1.get().getExtendedbids());
+                    if(membership1.get().getId()==6 || membership1.get().getId()==7){
+                        users1.setPriority(users1.getPriority()+1);
+
+                    }else if(membership1.get().getId()==5 || membership1.get().getId()==8){
+                        users1.setPriority(users1.getPriority()+3);
+                    }else{
+                        users1.setPriority(users1.getPriority()+5);
+                    }
+                    if(users1.getMembershipexpiry()!=null){
+                        users1.setMembershipexpiry(users1.getMembershipexpiry().plusDays(membership1.get().getDuration()));}
+                    else {
+                        users1.setMembershipexpiry(LocalDate.now().plusDays(membership1.get().getDuration()));
+                    }
+
+                usersDao.save(users1);
+                return users1;
                 }
-                if(users1.getMembershipexpiry()!=null){
-                users1.setMembershipexpiry(users1.getMembershipexpiry().plusDays(membership1.get().getDuration()));}
                 else {
-                    users1.setMembershipexpiry(LocalDate.now().plusDays(membership1.get().getDuration()));
+                    return null;
                 }
-            }
-            usersDao.save(users1);
-            return users1;
+
+
         }
 
         return  null;
