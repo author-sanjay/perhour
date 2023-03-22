@@ -12,6 +12,8 @@ public interface ProjectService {
     public  List<Projects> assigned(long id);
     public Projects add(Projects project,long id) ;
 
+    public Projects submit(long id, Projects pr);
+
     public Projects update(Projects project) ;
 
     public Projects delete(long project) ;

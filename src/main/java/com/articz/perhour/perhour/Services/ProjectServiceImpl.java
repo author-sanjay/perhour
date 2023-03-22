@@ -91,8 +91,21 @@ public class ProjectServiceImpl implements ProjectService{
             project.setTags(tagss);
             project.setGivenby(users.get());
             project.setGivenbyy(users.get().getFirstname()+" "+users.get().getLastname());
+
             projectsDao.save(project);
             return project;
+        }
+        return null;
+    }
+
+    @Override
+    public Projects submit(long id, Projects prr) {
+        Optional<Projects> pr=projectsDao.findById(id);
+        if(pr.isPresent()){
+            pr.get().setDeliverylink(prr.getDeliverylink());
+            pr.get().setStatus("Delivered");
+            projectsDao.save(pr.get());
+            return  pr.get();
         }
         return null;
     }
@@ -204,6 +217,9 @@ public class ProjectServiceImpl implements ProjectService{
             }else{
             pr.get().setGivento(user.get());
             pr.get().setStatus("Assigned");
+            pr.get().setPaymentdone(true);
+            pr.get().setDeliverydate(LocalDate.now().plusDays( Long.parseLong(pr.get().getTimelimit())  ));
+            pr.get().setLastdate(LocalDate.now().plusDays( Long.parseLong(pr.get().getTimelimit())  ));
             List<Bids> bids=pr.get().getBids();
             Bids bid=new Bids();
             for(int i=0;i<bids.size();i++){

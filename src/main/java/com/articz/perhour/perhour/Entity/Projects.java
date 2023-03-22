@@ -15,6 +15,8 @@ public class Projects {
 
     private String title;
 
+    private String deliverylink;
+
     private long extend;
     private String shortdescription;
     private String fulldescription;
@@ -38,6 +40,8 @@ public class Projects {
 
     private LocalDate deliverydate;
 
+    private long giventoo;
+
     @OneToOne
     @JoinColumn(name = "givenby_id")
     @JsonIgnore
@@ -54,6 +58,7 @@ public class Projects {
     @JsonIgnore
     private List<Bids> bids;
 
+    private String giventoname;
     private boolean paymentdone;
 
     private String paymentid;
@@ -75,9 +80,10 @@ public class Projects {
     }
 
 
-    public Projects(long id, String title, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, LocalDate postedon, String category, long assignedtoid, String experience, LocalDate deliverydate, Users givenby, List<String> tags, Users givento, List<Bids> bids, boolean paymentdone, String paymentid, boolean active, String paymentstatus, String feedback, double feedbackstars, String status, String givenbyy, String taggs, boolean fixed) {
+    public Projects(long id, String title, String deliverylink, long extend, String shortdescription, String fulldescription, long price, long totalbids, LocalDate startdate, LocalDate lastdate, String timelimit, LocalDate postedon, String category, long assignedtoid, String experience, LocalDate deliverydate, long giventoo, Users givenby, List<String> tags, Users givento, List<Bids> bids, String giventoname, boolean paymentdone, String paymentid, boolean active, String paymentstatus, String feedback, double feedbackstars, String status, String givenbyy, String taggs, boolean fixed) {
         this.id = id;
         this.title = title;
+        this.deliverylink = deliverylink;
         this.extend = extend;
         this.shortdescription = shortdescription;
         this.fulldescription = fulldescription;
@@ -91,10 +97,12 @@ public class Projects {
         this.assignedtoid = assignedtoid;
         this.experience = experience;
         this.deliverydate = deliverydate;
+        this.giventoo = giventoo;
         this.givenby = givenby;
         this.tags = tags;
         this.givento = givento;
         this.bids = bids;
+        this.giventoname = giventoname;
         this.paymentdone = paymentdone;
         this.paymentid = paymentid;
         this.active = active;
@@ -121,6 +129,14 @@ public class Projects {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDeliverylink() {
+        return deliverylink;
+    }
+
+    public void setDeliverylink(String deliverylink) {
+        this.deliverylink = deliverylink;
     }
 
     public long getExtend() {
@@ -227,6 +243,14 @@ public class Projects {
         this.deliverydate = deliverydate;
     }
 
+    public long getGiventoo() {
+        return giventoo;
+    }
+
+    public void setGiventoo(long giventoo) {
+        this.giventoo = giventoo;
+    }
+
     public Users getGivenby() {
         return givenby;
     }
@@ -257,6 +281,14 @@ public class Projects {
 
     public void setBids(List<Bids> bids) {
         this.bids = bids;
+    }
+
+    public String getGiventoname() {
+        return giventoname;
+    }
+
+    public void setGiventoname(String giventoname) {
+        this.giventoname = giventoname;
     }
 
     public boolean isPaymentdone() {

@@ -75,6 +75,12 @@ public class ProjectsController {
     }
 
 
+    @PostMapping(path = "/submit/{id}")
+    public Projects submit(@PathVariable long id,@RequestBody Projects pr){
+        return this.projectService.submit(id,pr);
+
+    }
+
     @PostMapping(path = "/assignproject/{id}/{id2}")
     public Projects assignproject(@PathVariable long id, @PathVariable long id2){
         return this.projectService.assignproject(id,id2);
