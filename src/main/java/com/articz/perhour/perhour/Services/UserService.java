@@ -20,7 +20,7 @@ public interface UserService {
     public Users resetpassword(long id,String password);
 
 
-
+    public List<Users> freelancer(String id);
 
     public Users update(Users users);
 

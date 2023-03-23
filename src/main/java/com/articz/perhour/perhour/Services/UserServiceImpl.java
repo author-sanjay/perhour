@@ -99,6 +99,22 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public List<Users> freelancer(String id) {
+        List<Users> users=usersDao.findAll();
+        ArrayList<Users> users1=new ArrayList<>();
+        for(int i=0;i<users.size();i++){
+            int index=users.get(i).getHeadline().indexOf(id);
+            int idex2=users.get(i).getUsername().indexOf(id);
+            int index3=users.get(i).getFirstname().indexOf(id);
+            int index4=users.get(i).getAbout().indexOf(id);
+            if(index!=-1 || idex2!=-1 ||index3!=-1 ||index4!=-1){
+                users1.add(users.get(i));
+            }
+        }
+        return users1;
+    }
+
 
     @Override
     public Users update(Users users) {

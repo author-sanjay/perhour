@@ -86,6 +86,13 @@ public class UserController {
 
 
 
+    @PostMapping("/searchfreelancer/{id}")
+    private List<Users> search(@PathVariable String id){
+        return  this.userService.freelancer(id);
+    }
+
+
+
     //done
     @PostMapping("/removemembership/{users}/{mem}")
     private Users remove(@PathVariable long users,@PathVariable long mem){
