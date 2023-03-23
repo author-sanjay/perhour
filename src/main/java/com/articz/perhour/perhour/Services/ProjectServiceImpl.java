@@ -256,8 +256,11 @@ public class ProjectServiceImpl implements ProjectService{
         for(int i=0;i<pr.size();i++){
             int title=pr.get(i).getTitle().indexOf(str);
             int desc=pr.get(i).getFulldescription().indexOf(str);
+
             if(title!=-1||desc!=-1){
-                ans.add(pr.get(i));
+                if (pr.get(i).getPostedon().isAfter(LocalDate.now().minusDays(3))){
+                    ans.add(pr.get(i));
+                }
             }
         }
         return ans;
