@@ -313,6 +313,12 @@ public class ProjectServiceImpl implements ProjectService{
             Users user=pr.get().getGivento();
             user.setPriority(user.getPriority()+1);
             user.setReferralcontri(user.getReferralcontri()+pr.get().getPrice()*0.05);
+            try{
+                Users users=user.getReferedby();
+                users.getWallet().setBalance((float) (users.getWallet().getBalance()+pr.get().getPrice()*0.05));
+            }catch (Exception e){
+
+            }
             usersDao.save(user);
             WalletTxn txn=new WalletTxn();
             txn.setDate(LocalDate.now());
@@ -322,6 +328,7 @@ public class ProjectServiceImpl implements ProjectService{
             txn.setWallet(pr.get().getGivento().getWallet());
             txn.setAmount((float) (pr.get().getPrice()*0.9));
             walletTxnService.add(txn,pr.get().getGivento().getId());
+
             return pr.get();
 
         }
