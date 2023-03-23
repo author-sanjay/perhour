@@ -58,6 +58,12 @@ public class UserController {
     }
 
 
+    @GetMapping("/getrefferals/{id}")
+    private List<Users> getref(@PathVariable long id){
+        return  this.userService.getreferrals(id);
+    }
+
+
     @GetMapping("/gettop")
     private List<Users> top3(){
         List<Users> top3=userService.top3();

@@ -117,6 +117,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<Users> getreferrals(long id) {
+        List<Users> users=usersDao.findAll();
+        ArrayList<Users> ans=new ArrayList<>();
+        for(int i=0;i<users.size();i++){
+            try{
+            if(users.get(i).getReferedby().getId()==id){
+                ans.add(users.get(i));
+            }
+            }catch (Exception e){
+                continue;
+            }
+        }
+        return ans;
+    }
+
+    @Override
     public List<Users> freelancer(String id) {
         List<Users> users=usersDao.findAll();
         ArrayList<Users> users1=new ArrayList<>();

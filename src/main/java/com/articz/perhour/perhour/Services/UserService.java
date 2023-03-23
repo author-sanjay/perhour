@@ -19,6 +19,8 @@ public interface UserService {
 
     public Users resetpassword(long id,String password);
 
+    public  List<Users> getreferrals(long id);
+
 
     public List<Users> freelancer(String id);
 
