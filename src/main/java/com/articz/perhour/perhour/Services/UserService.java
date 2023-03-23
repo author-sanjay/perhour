@@ -1,6 +1,7 @@
 package com.articz.perhour.perhour.Services;
 
 import com.articz.perhour.perhour.Entity.*;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,6 +16,8 @@ public interface UserService {
     public Users findbyusername(String username);
 
     public Users login(String email, String password);
+
+    public Users resetpassword(long id,String password);
 
     public Users update(Users users);
 

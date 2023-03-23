@@ -107,5 +107,13 @@ public class ProjectsController {
 
 
 
+    @PostMapping(path = "/revview/{id}")
+    public Projects review(@PathVariable long id){
+        return this.projectService.requestreview(id);
+
+    }
+
+
+
 
 }

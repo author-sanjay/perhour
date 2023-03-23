@@ -89,6 +89,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Users resetpassword(long id, String password) {
+        Optional<Users> user=usersDao.findById(id);
+        if (user.isPresent()){
+            user.get().setPassword(password);
+            usersDao.save(user.get());
+            return user.get();
+        }
+        return null;
+    }
+
+    @Override
     public Users update(Users users) {
         Optional<Users> users1=usersDao.findById(users.getId());
         if(users1.isPresent()){

@@ -228,6 +228,9 @@ public class ProjectServiceImpl implements ProjectService{
                 }
             }
             pr.get().setDeliverydate(LocalDate.now().plusDays(bid.getProposedtime()));
+            pr.get().setLastdate(LocalDate.now().plusDays(bid.getProposedtime()));
+            pr.get().setGiventoo(user.get().getId());
+            pr.get().setGiventoname(user.get().getUsername());
             pr.get().setAssignedtoid(user.get().getId());
            Projects pr2= projectsDao.save(pr.get());
             List<Projects> projects=user.get().getProjects();
@@ -236,6 +239,17 @@ public class ProjectServiceImpl implements ProjectService{
             usersDao.save(user.get());
             return pr2;
             }
+        }
+        return null;
+    }
+
+    @Override
+    public Projects requestreview(long projectid) {
+        Optional<Projects> pr=projectsDao.findById(projectid);
+        if(pr.isPresent()){
+            pr.get().setStatus("Requires Review");
+            projectsDao.save(pr.get());
+            return  pr.get();
         }
         return null;
     }

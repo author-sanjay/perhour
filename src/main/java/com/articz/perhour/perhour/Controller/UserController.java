@@ -21,6 +21,11 @@ public class UserController {
     @PostMapping("/verifyusername/{id}")
     private  boolean verufiyusername(@PathVariable String id){return  this.userService.verifyusername(id);}
 
+
+    @PostMapping("/changepassword/{id}/{id2}")
+    private  Users forgorpassword(@PathVariable long id,@PathVariable String id2){return  this.userService.resetpassword(id,id2);}
+
+
     //done
     @PostMapping("/add")
     private Users add(@RequestBody Users users){
