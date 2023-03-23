@@ -114,6 +114,12 @@ public class ProjectsController {
     }
 
 
+    @PostMapping(path = "/searched/{id}")
+    public List<Projects> searched(@PathVariable String id){
+        return this.projectService.searchresults(id);
+    }
+
+
 
 
 }

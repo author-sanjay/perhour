@@ -1,6 +1,7 @@
 package com.articz.perhour.perhour.Services;
 
 import com.articz.perhour.perhour.Entity.Projects;
+import com.articz.perhour.perhour.Entity.Users;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,6 +33,10 @@ public interface ProjectService {
 
 
     public Projects requestreview(long projectid);
+
+
+    public List<Projects> searchresults(String str);
+
 
    public Projects revoke(long id);
 

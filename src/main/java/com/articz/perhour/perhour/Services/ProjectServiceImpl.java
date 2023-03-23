@@ -4,11 +4,6 @@ import com.articz.perhour.perhour.Dao.UsersDao;
 import com.articz.perhour.perhour.Dao.WalletDao;
 import com.articz.perhour.perhour.Dao.WalletTxnDao;
 import com.articz.perhour.perhour.Entity.*;
-import com.razorpay.Order;
-import com.razorpay.RazorpayClient;
-import com.razorpay.RazorpayException;
-import org.apache.catalina.User;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -252,6 +247,20 @@ public class ProjectServiceImpl implements ProjectService{
             return  pr.get();
         }
         return null;
+    }
+
+    @Override
+    public List<Projects> searchresults(String str) {
+        List<Projects> pr=projectsDao.findAll();
+        ArrayList<Projects> ans=new ArrayList<>();
+        for(int i=0;i<pr.size();i++){
+            int title=pr.get(i).getTitle().indexOf(str);
+            int desc=pr.get(i).getFulldescription().indexOf(str);
+            if(title!=-1||desc!=-1){
+                ans.add(pr.get(i));
+            }
+        }
+        return ans;
     }
 
     @Override

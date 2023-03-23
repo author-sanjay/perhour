@@ -19,6 +19,9 @@ public interface UserService {
 
     public Users resetpassword(long id,String password);
 
+
+
+
     public Users update(Users users);
 
     public Users remove(long id);
