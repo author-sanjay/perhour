@@ -18,12 +18,20 @@ public class Users {
 
     private String address;
 
+    private String referralcode;
+
+    private String referredbycode;
+
     private String country;
 
     private double totalstars;
     private String phone;
 
     private String email;
+
+    @OneToOne
+    @JoinColumn(name = "referedby_id")
+    private Users referedby;
 
     private String username;
 
@@ -49,6 +57,7 @@ public class Users {
 
     private boolean ismember;
 
+
     private String about;
     private long membershipid;
     private LocalDate membershipexpiry;
@@ -71,21 +80,28 @@ public class Users {
     @JsonIgnore
     private List<Projects> projects;
 
+
+
+
     private long priority;
+
     public Users() {
         super();
     }
 
-    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String country, double totalstars, String phone, String email, String username, String password, String role, String bankingname, String accountnumber, String withdrawltype, String billingaddress, long bidsleft, double star, String headline, double rates, boolean ismember, String about, long membershipid, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects, long priority) {
+    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String referralcode, String referredbycode, String country, double totalstars, String phone, String email, Users referedby, String username, String password, String role, String bankingname, String accountnumber, String withdrawltype, String billingaddress, long bidsleft, double star, String headline, double rates, boolean ismember, String about, long membershipid, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects, long priority) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.dateofbirth = dateofbirth;
         this.address = address;
+        this.referralcode = referralcode;
+        this.referredbycode = referredbycode;
         this.country = country;
         this.totalstars = totalstars;
         this.phone = phone;
         this.email = email;
+        this.referedby = referedby;
         this.username = username;
         this.password = password;
         this.role = role;
@@ -148,6 +164,22 @@ public class Users {
         this.address = address;
     }
 
+    public String getReferralcode() {
+        return referralcode;
+    }
+
+    public void setReferralcode(String referralcode) {
+        this.referralcode = referralcode;
+    }
+
+    public String getReferredbycode() {
+        return referredbycode;
+    }
+
+    public void setReferredbycode(String referredbycode) {
+        this.referredbycode = referredbycode;
+    }
+
     public String getCountry() {
         return country;
     }
@@ -178,6 +210,14 @@ public class Users {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Users getReferedby() {
+        return referedby;
+    }
+
+    public void setReferedby(Users referedby) {
+        this.referedby = referedby;
     }
 
     public String getUsername() {

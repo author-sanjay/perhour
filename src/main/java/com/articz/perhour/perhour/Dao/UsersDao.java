@@ -17,4 +17,5 @@ public interface UsersDao extends JpaRepository<Users,Long> {
 
 //    public Optional<Users> findbyReferrcode(String code);
 
+    public Optional<Users> findByReferralcode(String refferalcode);
 }

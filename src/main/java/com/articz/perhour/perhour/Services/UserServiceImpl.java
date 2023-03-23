@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,20 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+
+    private static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final int LENGTH = 6;
+    private static final SecureRandom random = new SecureRandom();
+
+    public static String generateRandomString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < LENGTH; i++) {
+            int randomIndex = random.nextInt(CHARACTERS.length());
+            sb.append(CHARACTERS.charAt(randomIndex));
+        }
+        return sb.toString();
+    }
 
 
     @Autowired
@@ -54,17 +69,19 @@ public class UserServiceImpl implements UserService {
         users.setWallet(wal);
         users.setPriority(5);
         users.setRole("ROLE_USER");
-
-
-
         Users users1=usersDao.save(users);
+        Optional<Users> refferdby=usersDao.findByReferralcode(users.getReferredbycode());
+        if(refferdby.isPresent()){
+            users1.setReferedby(refferdby.get());
+            users1.setReferralcode(generateRandomString().toUpperCase());
+            usersDao.save(users1);
+            usersDao.save(refferdby.get());
+        }
         wal.setUser(users1);
         wal.setBalance(0);
         walletDao.save(wal);
         
         return users;
-
-
     }
 
     @Override
