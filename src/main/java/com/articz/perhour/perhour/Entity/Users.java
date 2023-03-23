@@ -16,6 +16,8 @@ public class Users {
     private String lastname;
     private String dateofbirth;
 
+    private double referralcontri;
+
     private String address;
 
     private String referralcode;
@@ -89,11 +91,12 @@ public class Users {
         super();
     }
 
-    public Users(long id, String firstname, String lastname, String dateofbirth, String address, String referralcode, String referredbycode, String country, double totalstars, String phone, String email, Users referedby, String username, String password, String role, String bankingname, String accountnumber, String withdrawltype, String billingaddress, long bidsleft, double star, String headline, double rates, boolean ismember, String about, long membershipid, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects, long priority) {
+    public Users(long id, String firstname, String lastname, String dateofbirth, double referralcontri, String address, String referralcode, String referredbycode, String country, double totalstars, String phone, String email, Users referedby, String username, String password, String role, String bankingname, String accountnumber, String withdrawltype, String billingaddress, long bidsleft, double star, String headline, double rates, boolean ismember, String about, long membershipid, LocalDate membershipexpiry, String photo, Membership membership, Wallet wallet, List<Projects> projects, long priority) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.dateofbirth = dateofbirth;
+        this.referralcontri = referralcontri;
         this.address = address;
         this.referralcode = referralcode;
         this.referredbycode = referredbycode;
@@ -154,6 +157,14 @@ public class Users {
 
     public void setDateofbirth(String dateofbirth) {
         this.dateofbirth = dateofbirth;
+    }
+
+    public double getReferralcontri() {
+        return referralcontri;
+    }
+
+    public void setReferralcontri(double referralcontri) {
+        this.referralcontri = referralcontri;
     }
 
     public String getAddress() {

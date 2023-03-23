@@ -207,12 +207,15 @@ public class ProjectServiceImpl implements ProjectService{
         Optional<Users> user=usersDao.findById(userid);
         Optional<Projects> pr=projectsDao.findById(projectid);
         if(user.isPresent() && pr.isPresent()){
-            if(pr.get().getGivento()!=null){
+            if(pr.get().getGivento()!=null && pr.get().getGivenby().getId()==userid){
                 return null;
-            }else{
+            }
+            else
+            {
             pr.get().setGivento(user.get());
             pr.get().setStatus("Assigned");
             pr.get().setPaymentdone(true);
+            pr.get().setGiventoo(user.get().getId());
             pr.get().setDeliverydate(LocalDate.now().plusDays( Long.parseLong(pr.get().getTimelimit())  ));
             pr.get().setLastdate(LocalDate.now().plusDays( Long.parseLong(pr.get().getTimelimit())  ));
             List<Bids> bids=pr.get().getBids();
@@ -309,6 +312,7 @@ public class ProjectServiceImpl implements ProjectService{
             projectsDao.save(pr.get());
             Users user=pr.get().getGivento();
             user.setPriority(user.getPriority()+1);
+            user.setReferralcontri(user.getReferralcontri()+pr.get().getPrice()*0.05);
             usersDao.save(user);
             WalletTxn txn=new WalletTxn();
             txn.setDate(LocalDate.now());
@@ -318,7 +322,7 @@ public class ProjectServiceImpl implements ProjectService{
             txn.setWallet(pr.get().getGivento().getWallet());
             txn.setAmount((float) (pr.get().getPrice()*0.9));
             walletTxnService.add(txn,pr.get().getGivento().getId());
-return pr.get();
+            return pr.get();
 
         }
         return null;
