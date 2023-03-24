@@ -73,6 +73,7 @@ public class UserServiceImpl implements UserService {
         users.setPriority(5);
         users.setRole("ROLE_USER");
         Users users1=usersDao.save(users);
+
         Optional<Users> refferdby=usersDao.findByReferralcode(users.getReferredbycode());
         if(refferdby.isPresent()){
             users1.setReferedby(refferdby.get());
@@ -80,11 +81,82 @@ public class UserServiceImpl implements UserService {
             usersDao.save(users1);
             usersDao.save(refferdby.get());
         }
+
+
+            try {
+                System.out.println("1");
+                String welcomeEmail =  "Dear "+users1.getFirstname()+",\n\n"
+                        + "👋 I am thrilled to welcome you to PerHour - the platform that connects freelancers and clients from all over the world. We are excited to have you onboard as part of our growing community of talented professionals.\n\n"
+                        + "As a freelancer on Per Hour, you will have access to a wide range of job opportunities, including web development, graphic design, writing, marketing, and much more. Our platform is designed to provide you with a hassle-free experience, allowing you to focus on your work and build your career.\n\n"
+                        + "Here are a few tips to get started:\n\n"
+                        + "1️⃣ Set up your profile: Make sure your profile is complete and up-to-date with your skills, experience, and portfolio. This will help clients find you and understand what you can offer.\n\n"
+                        + "2️⃣ Browse and apply for jobs: We have hundreds of jobs available every day, so make sure to check them out and apply for the ones that match your skills and interests.\n\n"
+                        + "3️⃣ Communicate effectively: Once you land a job, it's essential to communicate effectively with the client. Be responsive, ask questions, and provide updates on your progress.\n\n"
+                        + "4️⃣ Build your reputation: Your reputation on PerHour is crucial to your success as a freelancer. Make sure to deliver high-quality work, meet deadlines, and maintain a professional demeanor at all times.\n\n"
+                        + "We are here to support you every step of the way, so if you have any questions or concerns, don't hesitate to reach out to our customer support team. 🤝\n\n"
+                        + "At PerHour, we believe in providing the best services to our clients. That's why we offer a unique guarantee: if a freelancer you have assigned does not deliver quality work, we will ensure that your work is completed on time and to your satisfaction, without any extra charges. 💪\n\n"
+                        + "Thank you for choosing PerHour. We are thrilled to have you as part of our community and look forward to seeing your success on our platform! 🚀\n\n"
+                        + "Best regards,\n\n"
+                        + "Sanjay\n\n"
+                        + "PerHour Team. 😊👨‍💻🌎";
+                System.out.println("2");
+                EmailReqBody emailReqBody=new EmailReqBody();
+                System.out.println("3");
+                emailReqBody.setBody(welcomeEmail);
+                System.out.println("4");
+                emailReqBody.setToEmail(users1.getEmail());
+                System.out.println("5");
+                emailReqBody.setSubject("Welcome to PerHour! 🎉\n\n");
+                System.out.println("6");
+                emailService.sendSimpleEmail(emailReqBody);
+                System.out.println("Final Ends");
+
+            }catch (Exception e){
+                System.out.println(e);
+            }
+
+        System.out.println("ThreadENds");
+
+
 //        emailService.sendSimpleEmail(users.getEmail(),"User Added Successfull","Thank You for signing up.");
         wal.setUser(users1);
         wal.setBalance(0);
         walletDao.save(wal);
-        
+        System.out.println("Threadstarted");
+        new Thread(()->{
+            try {
+                System.out.println("1");
+                String welcomeEmail =  "Dear "+users1.getFirstname()+",\n\n"
+                        + "👋 I am thrilled to welcome you to PerHour - the platform that connects freelancers and clients from all over the world. We are excited to have you onboard as part of our growing community of talented professionals.\n\n"
+                        + "As a freelancer on Per Hour, you will have access to a wide range of job opportunities, including web development, graphic design, writing, marketing, and much more. Our platform is designed to provide you with a hassle-free experience, allowing you to focus on your work and build your career.\n\n"
+                        + "Here are a few tips to get started:\n\n"
+                        + "1️⃣ Set up your profile: Make sure your profile is complete and up-to-date with your skills, experience, and portfolio. This will help clients find you and understand what you can offer.\n\n"
+                        + "2️⃣ Browse and apply for jobs: We have hundreds of jobs available every day, so make sure to check them out and apply for the ones that match your skills and interests.\n\n"
+                        + "3️⃣ Communicate effectively: Once you land a job, it's essential to communicate effectively with the client. Be responsive, ask questions, and provide updates on your progress.\n\n"
+                        + "4️⃣ Build your reputation: Your reputation on PerHour is crucial to your success as a freelancer. Make sure to deliver high-quality work, meet deadlines, and maintain a professional demeanor at all times.\n\n"
+                        + "We are here to support you every step of the way, so if you have any questions or concerns, don't hesitate to reach out to our customer support team. 🤝\n\n"
+                        + "At PerHour, we believe in providing the best services to our clients. That's why we offer a unique guarantee: if a freelancer you have assigned does not deliver quality work, we will ensure that your work is completed on time and to your satisfaction, without any extra charges. 💪\n\n"
+                        + "Thank you for choosing PerHour. We are thrilled to have you as part of our community and look forward to seeing your success on our platform! 🚀\n\n"
+                        + "Best regards,\n\n"
+                        + "Sanjay\n\n"
+                        + "PerHour Team. 😊👨‍💻🌎";
+                System.out.println("2");
+                EmailReqBody emailReqBody=new EmailReqBody();
+                System.out.println("3");
+                emailReqBody.setBody(welcomeEmail);
+                System.out.println("4");
+                emailReqBody.setToEmail(users1.getEmail());
+                System.out.println("5");
+                emailReqBody.setSubject("Welcome to PerHour! 🎉\n\n");
+                System.out.println("6");
+                emailService.sendSimpleEmail(emailReqBody);
+                System.out.println("Final Ends");
+
+            }catch (Exception e){
+
+            }
+        });
+        System.out.println("ThreadENds");
         return users;
     }
 

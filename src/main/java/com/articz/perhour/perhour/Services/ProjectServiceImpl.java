@@ -19,6 +19,11 @@ public class ProjectServiceImpl implements ProjectService{
 
     @Autowired
     public ProjectsDao projectsDao;
+
+    @Autowired
+    public  EmailService emailService;
+
+
     @Autowired
     private UsersDao usersDao;
     @Autowired
@@ -88,7 +93,28 @@ public class ProjectServiceImpl implements ProjectService{
             project.setGivenbyy(users.get().getFirstname()+" "+users.get().getLastname());
 
             projectsDao.save(project);
+            try {
+                String email = "Dear "+users.get().getFirstname()+",\n\n"
+                        + "I hope this email finds you well. 🙌 I wanted to take a moment to remind you that PErHour is the perfect platform for finding top-quality freelancers for your business needs. 💪 Our talented pool of professionals includes experts in web development, graphic design, writing, marketing, and many other fields. 🌐🎨📝📈\n\n"
+                        + "If you're looking for a freelancer, feel free to post your job requirement on our platform. Our user-friendly interface makes it easy for you to post your requirements and connect with freelancers who have the right skills and experience to meet your needs. 💻👌\n\n"
+                        + "At PerHour, we are committed to providing you with the highest quality services. That's why we offer a unique guarantee to our clients: if a freelancer you have assigned does not deliver quality work, we will ensure that your work is completed on time and to your satisfaction without any extra charges. 💯🙅‍♂️💰\n\n"
+                        + "Our priority is your satisfaction, and we believe that our no extra charges policy sets us apart from our competitors. With PerHour, you can be sure that you are getting the best value for your money. 💵💰\n\n"
+                        + "Thank you for choosing PerHour for your freelance needs. We look forward to serving you and helping you find the best freelancers for your business. 🤝👨‍💼👩‍💼\n\n"
+                        + "Best regards,\n\n"
+                        + "Sanjay Kumar\n\n"
+                        + "PerHour Team. 🚀👨‍👩‍👧‍👦";
+
+
+                EmailReqBody emailReqBody2=new EmailReqBody();
+                emailReqBody2.setBody(email);
+                emailReqBody2.setToEmail(users.get().getEmail());
+                emailReqBody2.setSubject("🎉👋 ProJect Posetd to PerHour  💼👨‍💻");
+                emailService.sendSimpleEmail(emailReqBody2);
+            }catch (Exception e){
+
+            }
             return project;
+
         }
         return null;
     }
@@ -235,6 +261,26 @@ public class ProjectServiceImpl implements ProjectService{
             projects.add(pr2);
             user.get().setProjects(projects);
             usersDao.save(user.get());
+            try {
+                String congratulationsEmail = "Dear " + user.get().getFirstname() + ",\n\n" +
+                        "🎉🎉🎉 Congratulations! You have been assigned a new project on our freelancing app! 🎉🎉🎉\n\n" +
+                        "We are thrilled to have you as part of our community and look forward to seeing the amazing work you will produce for this project. 🚀💻🎨📈\n\n" +
+                        "Remember, communication is key to success, so make sure to stay in touch with your client and provide regular updates on your progress. 📲💬👨‍💻\n\n" +
+                        "If you have any questions or concerns, don't hesitate to reach out to our support team. We're always here to help! 🤝❤️\n\n" +
+                        "Good luck, and happy freelancing! 🎊🎉💪\n\n" +
+                        "Best regards,\n\n" +
+                        "Your Freelancing App Team 🌟🚀💻";
+
+
+                EmailReqBody emailReqBody2=new EmailReqBody();
+                emailReqBody2.setBody(congratulationsEmail);
+                emailReqBody2.setToEmail(user.get().getEmail());
+                emailReqBody2.setSubject("🎉👋 ProJect Posetd to PerHour  💼👨‍💻");
+                emailService.sendSimpleEmail(emailReqBody2);
+
+            }catch (Exception e){
+
+            }
             return pr2;
             }
         }
