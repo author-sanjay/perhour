@@ -38,6 +38,9 @@ public class UserServiceImpl implements UserService {
 
 
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     public RazorPay razorPay;
 
     @Autowired
@@ -77,6 +80,7 @@ public class UserServiceImpl implements UserService {
             usersDao.save(users1);
             usersDao.save(refferdby.get());
         }
+//        emailService.sendSimpleEmail(users.getEmail(),"User Added Successfull","Thank You for signing up.");
         wal.setUser(users1);
         wal.setBalance(0);
         walletDao.save(wal);
