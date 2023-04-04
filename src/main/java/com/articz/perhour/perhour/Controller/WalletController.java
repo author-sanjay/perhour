@@ -3,6 +3,7 @@ package com.articz.perhour.perhour.Controller;
 import com.articz.perhour.perhour.Entity.WalletTxn;
 import com.articz.perhour.perhour.Services.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ public class WalletController {
 
 
 //    done
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @GetMapping(path = "/balance/{id}")
     public float balance(@PathVariable long id){
         return this.walletService.balance(id);
@@ -27,6 +29,7 @@ public class WalletController {
 
 
 //    done
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @GetMapping(path = "/txns/{id}")
     public List<WalletTxn> txns(@PathVariable long id){
         return this.walletService.gettxn(id);

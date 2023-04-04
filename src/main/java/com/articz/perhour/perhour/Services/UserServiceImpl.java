@@ -11,6 +11,7 @@ import org.hibernate.query.spi.Limit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -73,15 +74,18 @@ public class UserServiceImpl implements UserService {
         users.setPriority(5);
         users.setRole("ROLE_USER");
         Users users1=usersDao.save(users);
+        users.setPassword(new BCryptPasswordEncoder().encode(users.getPassword()));
+        if(users.getReferredbycode()!=null){
 
-        Optional<Users> refferdby=usersDao.findByReferralcode(users.getReferredbycode());
-        if(refferdby.isPresent()){
-            users1.setReferedby(refferdby.get());
-            users1.setReferralcode(generateRandomString().toUpperCase());
-            usersDao.save(users1);
-            usersDao.save(refferdby.get());
+            Optional<Users> refferdby=usersDao.findByReferralcode(users.getReferredbycode());
+            if(refferdby.isPresent()){
+                users1.setReferedby(refferdby.get());
+                users1.setReferralcode(generateRandomString().toUpperCase());
+                usersDao.save(users1);
+                usersDao.save(refferdby.get());
+            }
+
         }
-
 
             try {
                 System.out.println("1");
